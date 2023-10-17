@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0903B0522ADED471009DA000 /* InputPhoneNumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0903B0512ADED471009DA000 /* InputPhoneNumViewController.swift */; };
+		0903B0552ADED4E0009DA000 /* CustomNaviBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0903B0542ADED4E0009DA000 /* CustomNaviBar.swift */; };
+		0903B0572ADED96C009DA000 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0903B0562ADED96C009DA000 /* BaseView.swift */; };
+		0950FA162AD951A60038A20E /* ErrorTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0950FA152AD951A60038A20E /* ErrorTracker.swift */; };
+		0950FA192AD9A3C20038A20E /* LoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0950FA182AD9A3C20038A20E /* LoginDTO.swift */; };
+		0950FA1C2AD9A4BD0038A20E /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0950FA1B2AD9A4BD0038A20E /* AuthError.swift */; };
 		0952E4512AB02BB600AEA429 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0952E4502AB02BB600AEA429 /* AppDelegate.swift */; };
 		0952E4532AB02BB600AEA429 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0952E4522AB02BB600AEA429 /* SceneDelegate.swift */; };
 		0952E4552AB02BB600AEA429 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0952E4542AB02BB600AEA429 /* BaseViewController.swift */; };
@@ -27,10 +33,21 @@
 		09555CFD2AB1E98A00974A2E /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09555CFC2AB1E98A00974A2E /* ViewModelType.swift */; };
 		09BAC6D22AB18FB90072BB16 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BAC6D12AB18FB90072BB16 /* HomeViewController.swift */; };
 		09BAC6D42AB18FC60072BB16 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BAC6D32AB18FC60072BB16 /* LoginViewController.swift */; };
+		09C59E692AD7C95600A631A7 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C59E682AD7C95600A631A7 /* MapViewController.swift */; };
+		09C59E6C2AD7C96500A631A7 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C59E6B2AD7C96500A631A7 /* MyPageViewController.swift */; };
+		09FA83E82AB700A400A8CFA8 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FA83E72AB700A400A8CFA8 /* TabBarController.swift */; };
+		09FA83F42AB720ED00A8CFA8 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FA83F32AB720ED00A8CFA8 /* HomeViewModel.swift */; };
 		59E8B44DA302C3BB6476E0F8 /* Pods_WooYah_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9F897BB0B935BBF9B85B84F /* Pods_WooYah_iOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0903B0502ADE9547009DA000 /* WooYah-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WooYah-iOS.entitlements"; sourceTree = "<group>"; };
+		0903B0512ADED471009DA000 /* InputPhoneNumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPhoneNumViewController.swift; sourceTree = "<group>"; };
+		0903B0542ADED4E0009DA000 /* CustomNaviBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNaviBar.swift; sourceTree = "<group>"; };
+		0903B0562ADED96C009DA000 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		0950FA152AD951A60038A20E /* ErrorTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTracker.swift; sourceTree = "<group>"; };
+		0950FA182AD9A3C20038A20E /* LoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDTO.swift; sourceTree = "<group>"; };
+		0950FA1B2AD9A4BD0038A20E /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		0952E44D2AB02BB600AEA429 /* WooYah-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WooYah-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0952E4502AB02BB600AEA429 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0952E4522AB02BB600AEA429 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +70,10 @@
 		09555CFC2AB1E98A00974A2E /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		09BAC6D12AB18FB90072BB16 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		09BAC6D32AB18FC60072BB16 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		09C59E682AD7C95600A631A7 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		09C59E6B2AD7C96500A631A7 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		09FA83E72AB700A400A8CFA8 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		09FA83F32AB720ED00A8CFA8 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		66E2D6B28BC325A674F04AF3 /* Pods-WooYah-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WooYah-iOS.release.xcconfig"; path = "Target Support Files/Pods-WooYah-iOS/Pods-WooYah-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		96172027C8B7DE7B6B6B5F5F /* Pods-WooYah-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WooYah-iOS.debug.xcconfig"; path = "Target Support Files/Pods-WooYah-iOS/Pods-WooYah-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		D9F897BB0B935BBF9B85B84F /* Pods_WooYah_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WooYah_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +99,30 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		0950FA142AD951940038A20E /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				0950FA152AD951A60038A20E /* ErrorTracker.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		0950FA172AD9A3B20038A20E /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				0950FA182AD9A3C20038A20E /* LoginDTO.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		0950FA1A2AD9A4B30038A20E /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				0950FA1B2AD9A4BD0038A20E /* AuthError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		0952E4442AB02BB600AEA429 = {
 			isa = PBXGroup;
 			children = (
@@ -99,10 +144,13 @@
 		0952E44F2AB02BB600AEA429 /* WooYah-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				0903B0502ADE9547009DA000 /* WooYah-iOS.entitlements */,
+				0950FA172AD9A3B20038A20E /* DTO */,
+				0950FA142AD951940038A20E /* Utility */,
 				0952E45E2AB02BBB00AEA429 /* Info.plist */,
+				09555CE42AB1C5D000974A2E /* Resource */,
 				09BAC6CA2AB18AE10072BB16 /* APP */,
 				09BAC6CB2AB18B140072BB16 /* Common */,
-				09555CE42AB1C5D000974A2E /* Resource */,
 				09BAC6CE2AB18F7A0072BB16 /* Present */,
 			);
 			path = "WooYah-iOS";
@@ -155,6 +203,7 @@
 		09BAC6CB2AB18B140072BB16 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				0950FA1A2AD9A4B30038A20E /* Error */,
 				09555CFB2AB1E97E00974A2E /* Protocol */,
 				09BAC6CD2AB18EDD0072BB16 /* UI */,
 			);
@@ -165,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				0952E4542AB02BB600AEA429 /* BaseViewController.swift */,
+				0903B0562ADED96C009DA000 /* BaseView.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -172,6 +222,7 @@
 		09BAC6CD2AB18EDD0072BB16 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				09FA83E92AB7012A00A8CFA8 /* UIController */,
 				09555CE02AB1C53B00974A2E /* Utils */,
 				09BAC6CC2AB18EC70072BB16 /* Base */,
 			);
@@ -181,6 +232,8 @@
 		09BAC6CE2AB18F7A0072BB16 /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				09C59E6A2AD7C95900A631A7 /* Mypage */,
+				09C59E672AD7C94700A631A7 /* Map */,
 				09BAC6D02AB18F9A0072BB16 /* Home */,
 				09BAC6CF2AB18F960072BB16 /* Login */,
 			);
@@ -191,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				09BAC6D32AB18FC60072BB16 /* LoginViewController.swift */,
+				0903B0512ADED471009DA000 /* InputPhoneNumViewController.swift */,
 				09555CF92AB1E91C00974A2E /* LoginViewModel.swift */,
 			);
 			path = Login;
@@ -200,8 +254,34 @@
 			isa = PBXGroup;
 			children = (
 				09BAC6D12AB18FB90072BB16 /* HomeViewController.swift */,
+				09FA83F32AB720ED00A8CFA8 /* HomeViewModel.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		09C59E672AD7C94700A631A7 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				09C59E682AD7C95600A631A7 /* MapViewController.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		09C59E6A2AD7C95900A631A7 /* Mypage */ = {
+			isa = PBXGroup;
+			children = (
+				09C59E6B2AD7C96500A631A7 /* MyPageViewController.swift */,
+			);
+			path = Mypage;
+			sourceTree = "<group>";
+		};
+		09FA83E92AB7012A00A8CFA8 /* UIController */ = {
+			isa = PBXGroup;
+			children = (
+				09FA83E72AB700A400A8CFA8 /* TabBarController.swift */,
+				0903B0542ADED4E0009DA000 /* CustomNaviBar.swift */,
+			);
+			path = UIController;
 			sourceTree = "<group>";
 		};
 		64569AFE55C7A5DB6A4D84FF /* Pods */ = {
@@ -336,14 +416,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0950FA1C2AD9A4BD0038A20E /* AuthError.swift in Sources */,
 				09555CE62AB1C5E600974A2E /* Fonts.swift in Sources */,
 				0952E4552AB02BB600AEA429 /* BaseViewController.swift in Sources */,
 				09555CE32AB1C54F00974A2E /* Colors.swift in Sources */,
+				09FA83E82AB700A400A8CFA8 /* TabBarController.swift in Sources */,
 				0952E4512AB02BB600AEA429 /* AppDelegate.swift in Sources */,
 				09555CFA2AB1E91C00974A2E /* LoginViewModel.swift in Sources */,
+				09FA83F42AB720ED00A8CFA8 /* HomeViewModel.swift in Sources */,
+				0950FA162AD951A60038A20E /* ErrorTracker.swift in Sources */,
+				09C59E6C2AD7C96500A631A7 /* MyPageViewController.swift in Sources */,
+				09C59E692AD7C95600A631A7 /* MapViewController.swift in Sources */,
+				0903B0522ADED471009DA000 /* InputPhoneNumViewController.swift in Sources */,
+				0903B0552ADED4E0009DA000 /* CustomNaviBar.swift in Sources */,
 				0952E4532AB02BB600AEA429 /* SceneDelegate.swift in Sources */,
 				09BAC6D42AB18FC60072BB16 /* LoginViewController.swift in Sources */,
 				09BAC6D22AB18FB90072BB16 /* HomeViewController.swift in Sources */,
+				0903B0572ADED96C009DA000 /* BaseView.swift in Sources */,
+				0950FA192AD9A3C20038A20E /* LoginDTO.swift in Sources */,
 				09555CFD2AB1E98A00974A2E /* ViewModelType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -482,6 +572,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "WooYah-iOS/WooYah-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JA7UDVTQBU;
@@ -492,6 +583,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -511,6 +603,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "WooYah-iOS/WooYah-iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JA7UDVTQBU;
@@ -521,6 +614,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

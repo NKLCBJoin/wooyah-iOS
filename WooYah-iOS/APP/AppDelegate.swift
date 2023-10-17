@@ -6,14 +6,46 @@
 //
 
 import UIKit
+import RxKakaoSDKAuth
+import KakaoSDKAuth
+import RxKakaoSDKCommon
+import NaverThirdPartyLogin
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var window: UIWindow?
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        if (AuthApi.isKakaoTalkLoginUrl(url)) {
+            return AuthController.rx.handleOpenUrl(url: url)
+        }
 
+        return false
+    }
+    // MARK: KakaoLogin
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
+        RxKakaoSDK.initSDK(appKey: "c6be0a8f4c6954ae14cecfe6a00b33c5") //KakaoLogin APP_KEY
+        
+        let instance = NaverThirdPartyLoginConnection.getSharedInstance()
+        // 네이버 앱으로 인증하는 방식 활성화
+        //instance?.isNaverAppOauthEnable = true
+        // Safari에서 인증하는 방식 활성화
+        instance?.isInAppOauthEnable = true
+        // 인증 화면을 iPhone의 세로 모드에서만 사용하기
+        instance?.isOnlyPortraitSupportedInIphone()
+
+        // 네이버 아이디로 로그인하기 설정
+        // 앱 등록시 입력한 URL Scheme
+        instance?.serviceUrlScheme = "kr.co.LineJoin.WooYah-iOS"
+        // 앱 등록후 발급받은 클라이언트 아이디
+        instance?.consumerKey = "NPLWiOtazFAwLSZU_rRU"
+        // 앱 등록 후 발급받은 클라이언트 시크릿
+        instance?.consumerSecret = "PfEhIlGBzb"
+        // 앱 이름
+        instance?.appName = "WooYah"
         return true
     }
 
