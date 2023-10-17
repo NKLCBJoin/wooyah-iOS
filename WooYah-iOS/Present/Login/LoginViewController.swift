@@ -6,10 +6,21 @@
 //
 
 import UIKit
+import RxSwift
+import KakaoSDKCommon
+import RxKakaoSDKCommon
+import KakaoSDKAuth
+import RxKakaoSDKAuth
+import KakaoSDKUser
+import RxKakaoSDKUser
+import AuthenticationServices
+import NaverThirdPartyLogin
 
 final class LoginViewController: BaseViewController {
-    private let viewmodel: LoginViewModel
     
+    private let viewModel:LoginViewModel!
+    private let naverLoginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
+
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "우리 함께 신선한 야채를 구매해요."
@@ -87,7 +98,7 @@ final class LoginViewController: BaseViewController {
     }
     
     init(_ viewModel: LoginViewModel) {
-        self.viewmodel = viewModel
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -95,8 +106,27 @@ final class LoginViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     override func setupBinding() {
-        
+        self.appleBtn.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                self?.viewModel.signInWithApple()
+            })
+            .disposed(by: disposeBag)
+        self.kakaoBtn.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                self?.viewModel.signInWithKakao()
+            })
+            .disposed(by: disposeBag)
+
+        self.naverBtn.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                self?.viewModel.naverLoginInstance?.requestThirdPartyLogin()
+            })
+            .disposed(by: disposeBag)
     }
 }
 

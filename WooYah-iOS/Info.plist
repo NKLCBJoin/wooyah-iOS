@@ -2,24 +2,46 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>UIUserInterfaceStyle</key>
-    <string>Light</string>
-    <key>UIAppFonts</key>
-    <array>
-        <string>SUIT-Bold.ttf</string>
-        <string>SUIT-ExtraBold.ttf</string>
-        <string>SUIT-ExtraLight.ttf</string>
-        <string>SUIT-Light.ttf</string>
-        <string>SUIT-Heavy.ttf</string>
-        <string>SUIT-Medium.ttf</string>
-        <string>SUIT-Regular.ttf</string>
-        <string>SUIT-SemiBold.ttf</string>
-        <string>SUIT-Thin.ttf</string>
-    </array>
-	<key>UIMainStoryboardFile~iphone</key>
-	<string></string>
-	<key>CFBundleIdentifier</key>
-	<string></string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>kakaoKey</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>kakaoc6be0a8f4c6954ae14cecfe6a00b33c5</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>naverlogin</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>kr.co.LineJoin.WooYah-iOS</string>
+			</array>
+		</dict>
+	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>naversearchthirdlogin</string>
+		<string>naversearchapp</string>
+	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SUIT-Bold.ttf</string>
+		<string>SUIT-ExtraBold.ttf</string>
+		<string>SUIT-ExtraLight.ttf</string>
+		<string>SUIT-Light.ttf</string>
+		<string>SUIT-Heavy.ttf</string>
+		<string>SUIT-Medium.ttf</string>
+		<string>SUIT-Regular.ttf</string>
+		<string>SUIT-SemiBold.ttf</string>
+		<string>SUIT-Thin.ttf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -37,5 +59,7 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIMainStoryboardFile~iphone</key>
+	<string></string>
 </dict>
 </plist>
