@@ -32,8 +32,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return
         }
         window = UIWindow(windowScene: windowScene)
-        let HomeVC = InputPhoneNumViewController(LoginViewModel())
-          window?.rootViewController = HomeVC
+        let HomeVC = TabBarController()
+          window?.rootViewController = UINavigationController(rootViewController: HomeVC)
           window?.makeKeyAndVisible()
 
     }

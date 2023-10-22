@@ -15,11 +15,13 @@ import KakaoSDKUser
 import RxKakaoSDKUser
 import AuthenticationServices
 import NaverThirdPartyLogin
+import MapKit
 
 final class LoginViewController: BaseViewController {
     
     private let viewModel:LoginViewModel!
     private let naverLoginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
+    let locationManager = CLLocationManager.init()
 
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -81,6 +83,12 @@ final class LoginViewController: BaseViewController {
             $0.addItem(naverBtn).width(49).height(49).marginStart(20)
             $0.addItem(appleBtn).width(49).height(49).marginStart(20)
         }
+        locationManager.delegate = self
+               locationManager.distanceFilter = kCLDistanceFilterNone
+               locationManager.desiredAccuracy = kCLLocationAccuracyBest
+               locationManager.requestWhenInUseAuthorization()
+               locationManager.startUpdatingLocation()
+        self.getLocation()
     }
     override func addview() {
         self.view.addSubview(titleLabel)
@@ -112,21 +120,69 @@ final class LoginViewController: BaseViewController {
             .asDriver()
             .drive(onNext: { [weak self] in
                 self?.viewModel.signInWithApple()
+                self?.navigationController?.pushViewController(InputPhoneNumViewController(LoginViewModel()), animated: true)
+                self?.navigationController?.navigationBar.isHidden = true
             })
             .disposed(by: disposeBag)
         self.kakaoBtn.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in
                 self?.viewModel.signInWithKakao()
+                
+                
             })
             .disposed(by: disposeBag)
-
+        
         self.naverBtn.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in
                 self?.viewModel.naverLoginInstance?.requestThirdPartyLogin()
             })
             .disposed(by: disposeBag)
+        
+        self.viewModel.kakaoLoginCompleteSubject.subscribe(onNext: { [weak self] in
+            let vc = InputPhoneNumViewController(LoginViewModel())
+            self?.navigationController?.pushViewController(vc, animated: true)
+            self?.navigationController?.navigationBar.isHidden = true
+        })
+        .disposed(by: disposeBag)
     }
 }
+extension LoginViewController: CLLocationManagerDelegate {
+    func getLocation() {
+        let geocoder = CLGeocoder.init()
+        let location = self.locationManager.location
+               
+               if location != nil {
+                   geocoder.reverseGeocodeLocation(location!) { (placemarks, error) in
+                       if error != nil {
+                           return
+                       }
+                       if let placemark = placemarks?.first {
+                           var address = ""
+                           
+                           if let administrativeArea = placemark.administrativeArea {
+                               address = "\(address) \(administrativeArea) "
+                               print(administrativeArea)
+                           }
+                           
+                           if let locality = placemark.locality {
+                               address = "\(address) \(locality) "
+                               print(locality)
+                           }
+                           
+                           if let thoroughfare = placemark.thoroughfare {
+                               address = "\(address) \(thoroughfare) "
+                               print(thoroughfare)
+                           }
+                           
+                           if let subThoroughfare = placemark.subThoroughfare {
+                               address = "\(address) \(subThoroughfare)"
+                               print(subThoroughfare)                            }
+                       }
+                   }
+               }
+           }
+}
+
 

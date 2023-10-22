@@ -6,29 +6,26 @@
 //
 
 import UIKit
+import Then
 
 @objc
 protocol CustomNaviBarDelegate{
     func backBtnClick(_ navibar:CustomNaviBar)
-    func searchBtnClick(_ navibar:CustomNaviBar)
 }
 
 class CustomNaviBar: BaseView {
     
     weak var delegate: CustomNaviBarDelegate?
     
-    public var navititleLabel: UILabel {
-        let label = UILabel()
-        label.text = "페이지정보"
-        label.font = .pretendard(.Bold, size: 18)
-//        label.textColor = UIColor(rgb: 0x333333)
-        return label
+    public var navititleLabel = UILabel().then{
+        $0.text = "페이지정보"
+        $0.font = .pretendard(.Bold, size: 18)
+//        $0.textColor = UIColor(rgb: 0x333333)
     }
-    public var backBtn: UIButton {
-        let btn = UIButton()
-        btn.setImage(UIImage(systemName: "chevron.left"), for: .normal)
-        btn.imageView?.contentMode = .scaleAspectFit
-        return btn
+    public let backBtn = UIButton().then{
+        $0.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        $0.imageView?.contentMode = .scaleAspectFit
+        $0.tintColor = .black
     }
 
 
@@ -42,7 +39,7 @@ class CustomNaviBar: BaseView {
     }
     
     override func layout() {
-        self.navititleLabel.snp.makeConstraints{
+        self.navititleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview()
         }
