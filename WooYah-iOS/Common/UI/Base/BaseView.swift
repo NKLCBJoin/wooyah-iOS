@@ -6,9 +6,9 @@
 //
 
 import UIKit
-import SnapKit
 
 class BaseView: UIView {
+
     func layout() {}
     func configure() {}
     func addview() {}
@@ -22,4 +22,5 @@ class BaseView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+
 }

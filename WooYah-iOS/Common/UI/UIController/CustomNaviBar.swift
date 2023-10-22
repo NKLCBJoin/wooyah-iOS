@@ -6,65 +6,53 @@
 //
 
 import UIKit
+import Then
 
 @objc
 protocol CustomNaviBarDelegate{
     func backBtnClick(_ navibar:CustomNaviBar)
-    func searchBtnClick(_ navibar:CustomNaviBar)
 }
+
 class CustomNaviBar: BaseView {
+    
     weak var delegate: CustomNaviBarDelegate?
-    public var navititleLabel: UILabel {
-        let label = UILabel()
-        label.text = "상품정보"
-        label.font = .pretendard(.Bold, size: 18)
-//        label.textColor = UIColor(rgb: 0x333333)
-        return label
+    
+    public var navititleLabel = UILabel().then{
+        $0.text = "페이지정보"
+        $0.font = .pretendard(.Bold, size: 18)
+//        $0.textColor = UIColor(rgb: 0x333333)
     }
-    public var backBtn: UIButton {
-        let btn = UIButton()
-        btn.setImage(UIImage(named: "Nan'Nez_Back"), for: .normal)
-        btn.imageView?.contentMode = .scaleAspectFit
-        return btn
+    public let backBtn = UIButton().then{
+        $0.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        $0.imageView?.contentMode = .scaleAspectFit
+        $0.tintColor = .black
     }
-    public var searchBtn: UIButton{
-        let btn = UIButton()
-        btn.setImage(UIImage(named: "Nan'Nez_Search"), for: .normal)
-        btn.imageView?.contentMode = .scaleAspectFit
-        return btn
-    }
+
 
     override func configure() {
         self.backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
-        self.searchBtn.addTarget(self, action: #selector(searchBtnClick), for: .touchUpInside)
     }
+    
     override func addview() {
         self.addSubview(backBtn)
-        self.addSubview(searchBtn)
         self.addSubview(navititleLabel)
     }
+    
     override func layout() {
-        self.navititleLabel.snp.makeConstraints{
+        self.navititleLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview()
         }
         self.backBtn.snp.makeConstraints{
             $0.top.equalToSuperview().offset(14)
-            $0.leading.equalToSuperview().offset(24)
+            $0.leading.equalToSuperview().offset(16)
             $0.height.equalTo(24)
         }
-        self.searchBtn.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(14)
-            $0.trailing.equalToSuperview().offset(-14)
-            $0.height.width.equalTo(24)
-        }
+
     }
 }
 extension CustomNaviBar {
     @objc func backBtnClick(){
         self.delegate?.backBtnClick(self)
-    }
-    @objc func searchBtnClick(){
-        self.delegate?.searchBtnClick(self)
     }
 }

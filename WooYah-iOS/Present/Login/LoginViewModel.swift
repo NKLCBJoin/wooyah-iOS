@@ -27,7 +27,9 @@ class LoginViewModel: NSObject, ViewModelType {
     
     var disposeBag = DisposeBag()
     let naverLoginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
-
+    let kakaoLoginCompleteSubject = PublishSubject<Void>()
+    private let userinfo = UserInfo.self
+    
     struct Input {
         
     }
@@ -75,11 +77,9 @@ class LoginViewModel: NSObject, ViewModelType {
                 let userEmail = user.kakaoAccount?.email
                 let userBirthday = user.kakaoAccount?.birthday
 
-                let contentText =
-                "user name : \(userName)\n userEmail : \(userEmail) \nuserBirthday : \(userBirthday)"
-
-                print("user - \(contentText)")
-
+                self.userinfo.shared.name = userName
+                self.kakaoLoginCompleteSubject.onNext(())
+                
             }, onFailure: {error in
                 print(error)
             })
@@ -122,10 +122,9 @@ class LoginViewModel: NSObject, ViewModelType {
             guard let id = object["id"] as? String else {return}
             guard let phone = object["mobile"] as? String else {return}
 
-            
-            let contentText =
-            "user name : \(name)\n userEmail : \(email)\n userid : \(id)\n tokenType : \(tokenType)\n accessToken : \(accessToken)\n refreshToken : \(refreshToken)\n phone : \(phone)"
-            print(contentText)
+            self.userinfo.shared.name = name
+            self.userinfo.shared.phone = phone
+
         }
     }
     
