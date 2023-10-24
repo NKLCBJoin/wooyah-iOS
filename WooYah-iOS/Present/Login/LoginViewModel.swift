@@ -15,6 +15,8 @@ import RxCocoa
 import NaverThirdPartyLogin
 import AuthenticationServices
 import Alamofire
+import CoreLocation
+import MapKit
 
 struct LoginInfo {
     var method: String?
@@ -28,19 +30,26 @@ class LoginViewModel: NSObject, ViewModelType {
     var disposeBag = DisposeBag()
     let naverLoginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
     let kakaoLoginCompleteSubject = PublishSubject<Void>()
+    private let locationManager = CLLocationManager.init()
     private let userinfo = UserInfo.self
     
     struct Input {
-        
+
     }
     
     struct Output {
-        
+
     }
     
     override init() {
         super.init()
         naverLoginInstance?.delegate = self
+        locationManager.delegate = self
+        locationManager.distanceFilter = kCLDistanceFilterNone
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        self.getLocation()
     }
     
      func signInWithKakao() {
@@ -129,11 +138,42 @@ class LoginViewModel: NSObject, ViewModelType {
     }
     
     func transform(input: Input) -> Output {
-
+        
         return Output()
     }
 }
-extension LoginViewModel: ASAuthorizationControllerDelegate, NaverThirdPartyLoginConnectionDelegate {
+extension LoginViewModel: ASAuthorizationControllerDelegate, NaverThirdPartyLoginConnectionDelegate, CLLocationManagerDelegate {
+    func getLocation() {
+        let geocoder = CLGeocoder.init()
+        let location = self.locationManager.location
+               
+               if location != nil {
+                   geocoder.reverseGeocodeLocation(location!) { (placemarks, error) in
+                       if error != nil {
+                           return
+                       }
+                       if let placemark = placemarks?.first {
+                           var address = ""
+                           if let locality = placemark.locality {
+                               address = "\(address)\(locality) "
+                               print(locality)
+                           }
+                           
+                           if let thoroughfare = placemark.thoroughfare {
+                               address = "\(address)\(thoroughfare) "
+                               self.userinfo.shared.address = address
+                               print(thoroughfare)
+                           }
+                           
+                           if let subThoroughfare = placemark.subThoroughfare {
+                               address = "\(address) \(subThoroughfare)"
+                               print(subThoroughfare)
+                    }
+                }
+            }
+        }
+    }
+    
     func oauth20ConnectionDidFinishRequestACTokenWithAuthCode() {
         print("네이버 로그인")
         signInWithNaver()

@@ -32,7 +32,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         self.tabBar.tintColor = .black
 
         self.tabBar.unselectedItemTintColor = .darkGray
-        
+
         
         setViewControllers([vc1,vc2,vc3], animated: false)
     }

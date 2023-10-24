@@ -14,10 +14,10 @@ enum TextRange {
 }
 class InputPhoneNumViewController: BaseViewController, CustomNaviBarDelegate {
     func backBtnClick(_ navibar: CustomNaviBar) {
-        
+        self.navigationController?.popViewController(animated: true)
     }
     
-    private let viewModel:LoginViewModel!
+    private let viewModel: InputPhoneViewModel!
     
     private let naviBar:CustomNaviBar = CustomNaviBar(frame: .zero)
     
@@ -81,13 +81,16 @@ class InputPhoneNumViewController: BaseViewController, CustomNaviBarDelegate {
     }
     
     override func setupBinding() {
+        
+        let input = InputPhoneViewModel.Input(phoneNumberText: self.phoneTextField.rx.text.orEmpty.asObservable(), nextBtnTap: self.nextBtn.rx.tap.asSignal())
+        let output = self.viewModel.transform(input: input)
+
         self.phoneTextField.rx.text.orEmpty.map(checkPhoneNum(_:)).subscribe(onNext: { text in
             switch text {
             case .over:
                 self.phoneTextField.layer.borderColor = UIColor(hexString: "#1F4EF6").cgColor
                 self.phoneLable.text = "올바른 휴대폰 번호입니다."
                 self.phoneLable.textColor = UIColor(hexString: "#1F4EF6")
-                self.nextBtn.isEnabled = true
                 self.nextBtn.setNextButtonState(state: .enabled)
             case .under:
                 self.phoneTextField.layer.borderColor = UIColor(hexString: "#FF7B7B").cgColor
@@ -103,6 +106,26 @@ class InputPhoneNumViewController: BaseViewController, CustomNaviBarDelegate {
             }
         })
         .disposed(by: disposeBag)
+        
+        output.isValidPhone
+            .asDriver(onErrorJustReturn: false)
+            .drive(self.nextBtn.rx.isEnabled)
+            .disposed(by: disposeBag)
+//        output.registerPublisher.bind(onNext: { [weak self] res in
+////            guard let self else { return }
+////            switch res {
+////            case .success:
+////                print("성공")
+////            case .failure(let error):
+////                print("실패")
+//            }
+//        }).disposed(by: disposeBag)
+
+        output.nextBtnTap.emit(onNext: { [weak self] in
+            self?.navigationController?.pushViewController(TabBarController(), animated: true)
+        })
+        .disposed(by: disposeBag)
+
     }
 
     private func checkPhoneNum(_ text: String) -> TextRange {
@@ -118,7 +141,7 @@ class InputPhoneNumViewController: BaseViewController, CustomNaviBarDelegate {
         return .under
     }
     
-    init(_ viewModel: LoginViewModel) {
+    init(_ viewModel: InputPhoneViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
