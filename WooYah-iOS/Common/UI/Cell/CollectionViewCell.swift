@@ -10,6 +10,15 @@ import UIKit
 class CollectionViewCell: UICollectionViewCell {
     static let identifier = "CollectionViewCell"
     
+    var carLabel = UILabel().then {
+        $0.text = "마늘(2개) \n계란 1판(15알씩)\n베이글(2쪽씩)"
+        $0.font = .pretendard(.Regular, size: 16)
+        $0.textColor = UIColor(hexString: "#484848")
+        $0.numberOfLines = 0
+        $0.baselineAdjustment = .alignCenters
+        $0.backgroundColor = .clear
+    }
+    
     private let myView = UIView().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.backgroundColor = .white
@@ -43,12 +52,12 @@ class CollectionViewCell: UICollectionViewCell {
         $0.textColor = UIColor(hexString: "#333333")
 
     }
-    private let goBtn = UIButton().then {
+    let goBtn = UIButton().then {
         $0.backgroundColor = UIColor(hexString: "#333333")
         $0.setTitle("바로가기", for: .normal)
         $0.titleLabel?.font = .pretendard(.Bold, size: 15)
         $0.setTitleColor(.white, for: .normal)
-        $0.layer.cornerRadius = 8
+        $0.layer.cornerRadius = 5
         $0.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     }
     
@@ -58,6 +67,7 @@ class CollectionViewCell: UICollectionViewCell {
         self.addSubview(locateLabel)
         self.addSubview(Img)
         self.addSubview(nameLabel)
+        self.addSubview(carLabel)
     }
     
     func layout() {
@@ -80,6 +90,12 @@ class CollectionViewCell: UICollectionViewCell {
         self.Img.snp.makeConstraints {
             $0.top.equalToSuperview().offset(15)
             $0.trailing.equalTo(self.locateLabel.snp.leading).offset(-8)
+        }
+        self.carLabel.snp.makeConstraints {
+            $0.top.equalTo(nameLabel.snp.bottom).offset(13)
+            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().offset(-16)
+            $0.height.equalTo(180)
         }
     }
     @available(*, unavailable)
