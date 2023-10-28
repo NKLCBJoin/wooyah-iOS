@@ -31,7 +31,6 @@ class InputPhoneViewModel: ViewModelType {
             .withLatestFrom(input.phoneNumberText).subscribe(onNext: { phonenum in
                 self.userinfo.shared.phone = phonenum
             }).disposed(by: disposeBag)
-        
 
         return Output(isValidPhone: isValidPhone,nextBtnTap:input.nextBtnTap, registerPublisher: registerPublisher)
     }
