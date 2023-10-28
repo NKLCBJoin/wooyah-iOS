@@ -32,7 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             return
         }
         window = UIWindow(windowScene: windowScene)
-        let HomeVC = LoginViewController(LoginViewModel())
+        let HomeVC = WriteViewController(WriteViewModel())
         let navigationController = UINavigationController(rootViewController: HomeVC)
           navigationController.isNavigationBarHidden = true // 네비게이션 바를 숨깁니다.
           
