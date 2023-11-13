@@ -16,7 +16,7 @@ extension UIButton{
         var backgroundColor: UIColor? {
             switch self {
             case .enabled:
-                return UIColor(hexString: "#1F4EF6")
+                return UIColor(hexString: "#333333")
             case .disabled:
                 return UIColor(hexString: "#DDDDE3")
             }
@@ -34,8 +34,7 @@ extension UIButton{
     func setNextButtonState(state: State) {
         self.backgroundColor = state.backgroundColor
         self.setTitleColor(state.foregroundColor, for: .normal)
-        self.isEnabled = (state == .enabled)
-        
+        self.isEnabled = (state == .enabled) ? true : false
     }
     
 }

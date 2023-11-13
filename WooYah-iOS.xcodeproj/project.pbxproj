@@ -15,6 +15,7 @@
 		0909A5C52AE7D6B5004D6E99 /* WriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0909A5C42AE7D6B5004D6E99 /* WriteViewModel.swift */; };
 		0909A5C92AE7E20C004D6E99 /* NSMutableAttributedString+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0909A5C82AE7E20C004D6E99 /* NSMutableAttributedString+.swift */; };
 		0909A5CB2AE7EDBE004D6E99 /* InputPhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0909A5CA2AE7EDBE004D6E99 /* InputPhoneViewModel.swift */; };
+		0936AB2D2AF1359600DD321F /* SearchAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0936AB2C2AF1359600DD321F /* SearchAddressViewController.swift */; };
 		0950FA162AD951A60038A20E /* ErrorTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0950FA152AD951A60038A20E /* ErrorTracker.swift */; };
 		0950FA192AD9A3C20038A20E /* LoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0950FA182AD9A3C20038A20E /* LoginDTO.swift */; };
 		0950FA1C2AD9A4BD0038A20E /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0950FA1B2AD9A4BD0038A20E /* AuthError.swift */; };
@@ -36,6 +37,7 @@
 		09555CF82AB1C61100974A2E /* SUIT-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 09555CEF2AB1C61100974A2E /* SUIT-ExtraLight.ttf */; };
 		09555CFA2AB1E91C00974A2E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09555CF92AB1E91C00974A2E /* LoginViewModel.swift */; };
 		09555CFD2AB1E98A00974A2E /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09555CFC2AB1E98A00974A2E /* ViewModelType.swift */; };
+		09798A292AF6A2A70078AD6F /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09798A282AF6A2A60078AD6F /* ProductTableViewCell.swift */; };
 		097D052F2ADFB725009D4DAD /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097D052E2ADFB725009D4DAD /* String+.swift */; };
 		097D05332ADFEFC3009D4DAD /* Button+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097D05322ADFEFC3009D4DAD /* Button+.swift */; };
 		09BAC6D22AB18FB90072BB16 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BAC6D12AB18FB90072BB16 /* HomeViewController.swift */; };
@@ -59,6 +61,7 @@
 		0909A5C42AE7D6B5004D6E99 /* WriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteViewModel.swift; sourceTree = "<group>"; };
 		0909A5C82AE7E20C004D6E99 /* NSMutableAttributedString+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+.swift"; sourceTree = "<group>"; };
 		0909A5CA2AE7EDBE004D6E99 /* InputPhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPhoneViewModel.swift; sourceTree = "<group>"; };
+		0936AB2C2AF1359600DD321F /* SearchAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddressViewController.swift; sourceTree = "<group>"; };
 		0950FA152AD951A60038A20E /* ErrorTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTracker.swift; sourceTree = "<group>"; };
 		0950FA182AD9A3C20038A20E /* LoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDTO.swift; sourceTree = "<group>"; };
 		0950FA1B2AD9A4BD0038A20E /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
@@ -82,6 +85,7 @@
 		09555CEF2AB1C61100974A2E /* SUIT-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-ExtraLight.ttf"; sourceTree = "<group>"; };
 		09555CF92AB1E91C00974A2E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		09555CFC2AB1E98A00974A2E /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
+		09798A282AF6A2A60078AD6F /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		097D052E2ADFB725009D4DAD /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		097D05322ADFEFC3009D4DAD /* Button+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+.swift"; sourceTree = "<group>"; };
 		09BAC6D12AB18FB90072BB16 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 		0909A5C12AE7CB4C004D6E99 /* Write */ = {
 			isa = PBXGroup;
 			children = (
+				0936AB2C2AF1359600DD321F /* SearchAddressViewController.swift */,
 				0909A5C22AE7CB59004D6E99 /* WriteViewController.swift */,
 				0909A5C42AE7D6B5004D6E99 /* WriteViewModel.swift */,
 			);
@@ -330,6 +335,7 @@
 			isa = PBXGroup;
 			children = (
 				09EB04EA2AE5737C00F23C4A /* CollectionViewCell.swift */,
+				09798A282AF6A2A60078AD6F /* ProductTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -485,12 +491,14 @@
 				09EB04EB2AE5737C00F23C4A /* CollectionViewCell.swift in Sources */,
 				097D05332ADFEFC3009D4DAD /* Button+.swift in Sources */,
 				0952E4512AB02BB600AEA429 /* AppDelegate.swift in Sources */,
+				0936AB2D2AF1359600DD321F /* SearchAddressViewController.swift in Sources */,
 				09555CFA2AB1E91C00974A2E /* LoginViewModel.swift in Sources */,
 				09FA83F42AB720ED00A8CFA8 /* HomeViewModel.swift in Sources */,
 				0909A5C92AE7E20C004D6E99 /* NSMutableAttributedString+.swift in Sources */,
 				0950FA162AD951A60038A20E /* ErrorTracker.swift in Sources */,
 				09C59E6C2AD7C96500A631A7 /* MyPageViewController.swift in Sources */,
 				09C59E692AD7C95600A631A7 /* MapViewController.swift in Sources */,
+				09798A292AF6A2A70078AD6F /* ProductTableViewCell.swift in Sources */,
 				0903B0522ADED471009DA000 /* InputPhoneNumViewController.swift in Sources */,
 				0903B0552ADED4E0009DA000 /* CustomNaviBar.swift in Sources */,
 				0952E4532AB02BB600AEA429 /* SceneDelegate.swift in Sources */,
