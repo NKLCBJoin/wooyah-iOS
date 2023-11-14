@@ -16,6 +16,7 @@
 		0909A5C92AE7E20C004D6E99 /* NSMutableAttributedString+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0909A5C82AE7E20C004D6E99 /* NSMutableAttributedString+.swift */; };
 		0909A5CB2AE7EDBE004D6E99 /* InputPhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0909A5CA2AE7EDBE004D6E99 /* InputPhoneViewModel.swift */; };
 		0936AB2D2AF1359600DD321F /* SearchAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0936AB2C2AF1359600DD321F /* SearchAddressViewController.swift */; };
+		094A91822B0273A40080C03A /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094A91812B0273A40080C03A /* MapViewModel.swift */; };
 		0950FA162AD951A60038A20E /* ErrorTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0950FA152AD951A60038A20E /* ErrorTracker.swift */; };
 		0950FA192AD9A3C20038A20E /* LoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0950FA182AD9A3C20038A20E /* LoginDTO.swift */; };
 		0950FA1C2AD9A4BD0038A20E /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0950FA1B2AD9A4BD0038A20E /* AuthError.swift */; };
@@ -62,6 +63,7 @@
 		0909A5C82AE7E20C004D6E99 /* NSMutableAttributedString+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+.swift"; sourceTree = "<group>"; };
 		0909A5CA2AE7EDBE004D6E99 /* InputPhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPhoneViewModel.swift; sourceTree = "<group>"; };
 		0936AB2C2AF1359600DD321F /* SearchAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddressViewController.swift; sourceTree = "<group>"; };
+		094A91812B0273A40080C03A /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		0950FA152AD951A60038A20E /* ErrorTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTracker.swift; sourceTree = "<group>"; };
 		0950FA182AD9A3C20038A20E /* LoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDTO.swift; sourceTree = "<group>"; };
 		0950FA1B2AD9A4BD0038A20E /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
@@ -124,7 +126,6 @@
 		0909A5C12AE7CB4C004D6E99 /* Write */ = {
 			isa = PBXGroup;
 			children = (
-				0936AB2C2AF1359600DD321F /* SearchAddressViewController.swift */,
 				0909A5C22AE7CB59004D6E99 /* WriteViewController.swift */,
 				0909A5C42AE7D6B5004D6E99 /* WriteViewModel.swift */,
 			);
@@ -137,6 +138,14 @@
 				D9F897BB0B935BBF9B85B84F /* Pods_WooYah_iOS.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		094A91832B03A0060080C03A /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				0936AB2C2AF1359600DD321F /* SearchAddressViewController.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		0950FA142AD951940038A20E /* Utility */ = {
@@ -277,6 +286,7 @@
 		09BAC6CE2AB18F7A0072BB16 /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				094A91832B03A0060080C03A /* Search */,
 				0909A5C12AE7CB4C004D6E99 /* Write */,
 				0909A5BE2AE7C0D0004D6E99 /* Popup */,
 				09BAC6D02AB18F9A0072BB16 /* Home */,
@@ -311,6 +321,7 @@
 			isa = PBXGroup;
 			children = (
 				09C59E682AD7C95600A631A7 /* MapViewController.swift */,
+				094A91812B0273A40080C03A /* MapViewModel.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -481,6 +492,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				094A91822B0273A40080C03A /* MapViewModel.swift in Sources */,
 				0950FA1C2AD9A4BD0038A20E /* AuthError.swift in Sources */,
 				09555CE62AB1C5E600974A2E /* Fonts.swift in Sources */,
 				097D052F2ADFB725009D4DAD /* String+.swift in Sources */,

@@ -17,7 +17,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         vc1.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
         vc1.navigationBar.isHidden = true
         vc1.tabBarItem.image = UIImage(systemName: "house")
-        let vc2 = UINavigationController(rootViewController: MapViewController())
+        let vc2 = UINavigationController(rootViewController: MapViewController(MapViewModel()))
         vc2.tabBarItem.image = UIImage(systemName: "map")
         vc2.tabBarItem.selectedImage = UIImage(systemName: "map.fill")
         vc2.navigationBar.isHidden = true

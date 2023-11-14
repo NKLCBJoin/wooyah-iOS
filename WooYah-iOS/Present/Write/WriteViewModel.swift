@@ -17,7 +17,8 @@ class WriteViewModel:ViewModelType {
     var productItems: BehaviorRelay<[String]> = BehaviorRelay(value: [])
     private var currentProductText: String = ""
     var personCount = BehaviorRelay<Int>(value: 1)
-    
+    let locate = PublishSubject<String>()
+
     func increasePersonCount() {
         let currentCount = personCount.value
         personCount.accept(currentCount + 1)

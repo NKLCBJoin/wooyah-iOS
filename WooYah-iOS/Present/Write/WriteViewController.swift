@@ -258,19 +258,14 @@ class WriteViewController: BaseViewController, UIScrollViewDelegate {
             .bind(to: productTableView.rx.items(cellIdentifier: "ProductTableViewCell",cellType: ProductTableViewCell.self)) { index, item, cell in
                 cell.selectionStyle = .none
                 cell.ItemLabel.text = item
-//                cell.DeleteBtn.rx.tap
-//                    .subscribe(onNext: { [weak self] in
-//                        self?.viewModel.deleteProductItem(item: item)
-//                        print("Add")
-//                    })
-//                    .disposed(by: cell.disposeBag)
             }
-                .disposed(by: disposeBag)
+            .disposed(by: disposeBag)
+        
         productTableView.rx.modelSelected(String.self)
                    .bind { [weak self] item in
                        self?.viewModel.deleteProductItem(item: item)
-                   }
-                   .disposed(by: disposeBag)
+                }
+                .disposed(by: disposeBag)
 
         self.completeBtn.rx.tap
             .withLatestFrom(isEnabledObservable.asObservable())

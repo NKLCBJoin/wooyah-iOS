@@ -10,6 +10,7 @@ import RxKakaoSDKAuth
 import KakaoSDKAuth
 import RxKakaoSDKCommon
 import NaverThirdPartyLogin
+import NMapsMap
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,7 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         RxKakaoSDK.initSDK(appKey: "c6be0a8f4c6954ae14cecfe6a00b33c5") //KakaoLogin APP_KEY
-        
+        NMFAuthManager.shared().clientId = "10sn471y2d"
+
         let instance = NaverThirdPartyLoginConnection.getSharedInstance()
         // 네이버 앱으로 인증하는 방식 활성화
         //instance?.isNaverAppOauthEnable = true
