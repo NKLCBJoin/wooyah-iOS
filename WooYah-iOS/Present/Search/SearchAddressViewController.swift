@@ -9,13 +9,19 @@ import UIKit
 import WebKit
 import RxCocoa
 import RxSwift
+import CoreLocation
 
 class SearchAddressViewController: UIViewController {
 
     var webView: WKWebView?
     let indicator = UIActivityIndicatorView(style: .medium)
-    var address = ""
     private let locate = PublishSubject<String>()
+    private let coordinate = PublishSubject<[Double]>()
+    
+    var coordinateSubject: Observable<[Double]> {
+        return coordinate.asObservable()
+    }
+
     var locateSubject: Observable<String> {
         return locate.asObservable()
     }
@@ -71,12 +77,30 @@ class SearchAddressViewController: UIViewController {
     private func saveLocate(locate: String) {
         self.dismiss(animated: true,completion: { [weak self] in
             self?.locate.onNext(locate)
-            self?.locate.onCompleted()
         })
     }
     
+    func changeToCoordinate(address: String?){
+        var latitude: Double?
+        var longitude: Double?
+        
+        if let address = address {
+            CLGeocoder().geocodeAddressString(address) { [weak self] (placemarks, error) in
+                guard let self = self else { return }
 
-    
+                if let placemarks = placemarks, let location = placemarks.first?.location {
+                    latitude = location.coordinate.latitude
+                    longitude = location.coordinate.longitude
+                    let coordinates = [latitude ?? 0.0, longitude ?? 0.0]
+                    print("서치뷰컨에서 \(coordinates)")
+                    coordinate.onNext(coordinates)
+
+                } else {
+                    print("주소를 찾을 수 없습니다.")
+                }
+            }
+        }
+    }
 }
 
 extension SearchAddressViewController: WKScriptMessageHandler {
@@ -84,7 +108,7 @@ extension SearchAddressViewController: WKScriptMessageHandler {
         if let data = message.body as? [String: Any] {
             if let address = data["roadAddress"] as? String {
                 self.saveLocate(locate: address)
-                print(data)
+                self.changeToCoordinate(address: address)
             }
         }
 

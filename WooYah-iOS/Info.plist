@@ -11,6 +11,8 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+            <key>NMFClientId</key>
+            <string>10sn471y2d</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
