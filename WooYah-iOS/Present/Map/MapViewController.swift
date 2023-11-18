@@ -57,7 +57,7 @@ class MapViewController: BaseViewController {
         self.searchBtn.rx.tap
             .asDriver()
             .flatMap { [weak self] _ -> Driver<String> in
-                guard let self = self else { return Driver.empty() } // 클로저가 실행되는 동안 self가 nil이라면 빈 Driver 반환
+                guard let self = self else { return Driver.empty() } 
 
                 let vc = SearchAddressViewController()
                 self.present(vc, animated: true, completion: nil)

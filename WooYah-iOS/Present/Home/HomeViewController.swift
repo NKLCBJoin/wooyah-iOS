@@ -85,7 +85,6 @@ class HomeViewController: BaseViewController {
         self.mainCollectionView.dataSource = self
         self.welcomeLabel.text = "안녕하세요.\n\(userinfo.shared.name ?? "유저")님!"
         self.locateLabel.text = "\(userinfo.shared.address ?? "xxx") 근방에 올라와 있는 글들입니다!"
-        print(userinfo.shared.phone)
     }
     
     init(_ viewModel: HomeViewModel) {
@@ -155,6 +154,7 @@ class HomeViewController: BaseViewController {
     
     @objc func goBtnClicked(_ sender: UIButton) {
         print("\(sender.tag)바로가기 클릭")
+        self.showPopupViewController(id: 0)
     }
     
 }
@@ -179,5 +179,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
       let cellWidth = Const.itemSize.width + Const.itemSpacing
       let index = round(scrolledOffsetX / cellWidth)
       targetContentOffset.pointee = CGPoint(x: index * cellWidth - scrollView.contentInset.left, y: scrollView.contentInset.top)
+    }
+}
+
+extension HomeViewController {
+    private func showPopupViewController(id: Int) {
+        let vc = PopupViewController()
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc,animated: false,completion: nil)
     }
 }
