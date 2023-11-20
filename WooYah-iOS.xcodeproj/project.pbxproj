@@ -48,6 +48,11 @@
 		09BAC6D42AB18FC60072BB16 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BAC6D32AB18FC60072BB16 /* LoginViewController.swift */; };
 		09C59E692AD7C95600A631A7 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C59E682AD7C95600A631A7 /* MapViewController.swift */; };
 		09C59E6C2AD7C96500A631A7 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C59E6B2AD7C96500A631A7 /* MyPageViewController.swift */; };
+		09E2D2A02B0B57A6009B0D51 /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E2D29F2B0B57A6009B0D51 /* HomeService.swift */; };
+		09E2D2A22B0B57C8009B0D51 /* MapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E2D2A12B0B57C8009B0D51 /* MapService.swift */; };
+		09E2D2A52B0B5AEA009B0D51 /* MapUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E2D2A42B0B5AEA009B0D51 /* MapUseCase.swift */; };
+		09E2D2A82B0B5B1B009B0D51 /* MapRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E2D2A72B0B5B1B009B0D51 /* MapRepository.swift */; };
+		09E2D2AA2B0B5C94009B0D51 /* MapDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E2D2A92B0B5C94009B0D51 /* MapDTO.swift */; };
 		09EB04E82AE40C9500F23C4A /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EB04E72AE40C9500F23C4A /* UserInfo.swift */; };
 		09EB04EB2AE5737C00F23C4A /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09EB04EA2AE5737C00F23C4A /* CollectionViewCell.swift */; };
 		09FA83E82AB700A400A8CFA8 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FA83E72AB700A400A8CFA8 /* TabBarController.swift */; };
@@ -100,6 +105,11 @@
 		09BAC6D32AB18FC60072BB16 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		09C59E682AD7C95600A631A7 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		09C59E6B2AD7C96500A631A7 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		09E2D29F2B0B57A6009B0D51 /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
+		09E2D2A12B0B57C8009B0D51 /* MapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapService.swift; sourceTree = "<group>"; };
+		09E2D2A42B0B5AEA009B0D51 /* MapUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapUseCase.swift; sourceTree = "<group>"; };
+		09E2D2A72B0B5B1B009B0D51 /* MapRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRepository.swift; sourceTree = "<group>"; };
+		09E2D2A92B0B5C94009B0D51 /* MapDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDTO.swift; sourceTree = "<group>"; };
 		09EB04E72AE40C9500F23C4A /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		09EB04EA2AE5737C00F23C4A /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		09FA83E72AB700A400A8CFA8 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -150,6 +160,8 @@
 			isa = PBXGroup;
 			children = (
 				091F12032B08637E00878E73 /* APIConstant.swift */,
+				09E2D29F2B0B57A6009B0D51 /* HomeService.swift */,
+				09E2D2A12B0B57C8009B0D51 /* MapService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -174,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				0950FA182AD9A3C20038A20E /* LoginDTO.swift */,
+				09E2D2A92B0B5C94009B0D51 /* MapDTO.swift */,
 				091F12052B0865FA00878E73 /* BaseResponse.swift */,
 			);
 			path = DTO;
@@ -249,6 +262,7 @@
 		0969A53D2B049F9000883862 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				09E2D2A62B0B5B03009B0D51 /* Repository */,
 				091F12022B08637000878E73 /* Service */,
 				0950FA172AD9A3B20038A20E /* DTO */,
 			);
@@ -258,6 +272,7 @@
 		0969A53E2B049F9B00883862 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				09E2D2A32B0B5AD8009B0D51 /* UseCase */,
 				09EB04E62AE40C8200F23C4A /* Model */,
 			);
 			path = Domain;
@@ -365,6 +380,22 @@
 				094A91842B03B7ED0080C03A /* MyPageViewModel.swift */,
 			);
 			path = Mypage;
+			sourceTree = "<group>";
+		};
+		09E2D2A32B0B5AD8009B0D51 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				09E2D2A42B0B5AEA009B0D51 /* MapUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		09E2D2A62B0B5B03009B0D51 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				09E2D2A72B0B5B1B009B0D51 /* MapRepository.swift */,
+			);
+			path = Repository;
 			sourceTree = "<group>";
 		};
 		09EB04E62AE40C8200F23C4A /* Model */ = {
@@ -527,9 +558,12 @@
 			files = (
 				094A91822B0273A40080C03A /* MapViewModel.swift in Sources */,
 				0950FA1C2AD9A4BD0038A20E /* AuthError.swift in Sources */,
+				09E2D2AA2B0B5C94009B0D51 /* MapDTO.swift in Sources */,
 				09555CE62AB1C5E600974A2E /* Fonts.swift in Sources */,
 				097D052F2ADFB725009D4DAD /* String+.swift in Sources */,
+				09E2D2A52B0B5AEA009B0D51 /* MapUseCase.swift in Sources */,
 				0952E4552AB02BB600AEA429 /* BaseViewController.swift in Sources */,
+				09E2D2A82B0B5B1B009B0D51 /* MapRepository.swift in Sources */,
 				0909A5C52AE7D6B5004D6E99 /* WriteViewModel.swift in Sources */,
 				09555CE32AB1C54F00974A2E /* Colors.swift in Sources */,
 				09FA83E82AB700A400A8CFA8 /* TabBarController.swift in Sources */,
@@ -539,6 +573,7 @@
 				0936AB2D2AF1359600DD321F /* SearchAddressViewController.swift in Sources */,
 				09555CFA2AB1E91C00974A2E /* LoginViewModel.swift in Sources */,
 				09FA83F42AB720ED00A8CFA8 /* HomeViewModel.swift in Sources */,
+				09E2D2A02B0B57A6009B0D51 /* HomeService.swift in Sources */,
 				0909A5C92AE7E20C004D6E99 /* NSMutableAttributedString+.swift in Sources */,
 				0950FA162AD951A60038A20E /* ErrorTracker.swift in Sources */,
 				09C59E6C2AD7C96500A631A7 /* MyPageViewController.swift in Sources */,
@@ -550,6 +585,7 @@
 				09BAC6D42AB18FC60072BB16 /* LoginViewController.swift in Sources */,
 				0909A5C32AE7CB59004D6E99 /* WriteViewController.swift in Sources */,
 				09BAC6D22AB18FB90072BB16 /* HomeViewController.swift in Sources */,
+				09E2D2A22B0B57C8009B0D51 /* MapService.swift in Sources */,
 				091F12062B0865FA00878E73 /* BaseResponse.swift in Sources */,
 				0903B0572ADED96C009DA000 /* BaseView.swift in Sources */,
 				091F12042B08637E00878E73 /* APIConstant.swift in Sources */,

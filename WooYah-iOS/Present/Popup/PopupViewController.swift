@@ -20,16 +20,20 @@ class PopupViewController: BaseViewController {
         $0.backgroundColor = UIColor(hexString: "#E8EAF0")
         $0.layer.cornerRadius = 8
     }
+    private let locateSV = UIStackView().then {
+        $0.axis = .horizontal
+        $0.spacing = 10
+    }
     private let locateInfoLabel = UILabel().then {
         $0.text = "동부 이촌동이마트"
-        $0.font = .pretendard(.Bold, size: 18)
-        $0.textColor = UIColor(hexString: "#656565")
+        $0.font = .pretendard(.Regular, size: 16)
+        $0.textColor = UIColor(hexString: "#484848")
         $0.sizeToFit()
     }
     private let locateLabel = UILabel().then {
         $0.text = "장보는 장소"
-        $0.font = .pretendard(.Bold, size: 18)
-        $0.textColor = UIColor(hexString: "#656565")
+        $0.font = .pretendard(.Regular, size: 16)
+        $0.textColor = UIColor(hexString: "#484848")
         $0.sizeToFit()
     }
     private let locateIcon = UIImageView().then {
@@ -38,8 +42,8 @@ class PopupViewController: BaseViewController {
         $0.backgroundColor = .clear
     }
     private let nameLabel = UILabel().then {
-        $0.text = "우리 함께 장보러가요!"
-        $0.font = .pretendard(.Bold, size: 18)
+        $0.text = "닉네임"
+        $0.font = .pretendard(.Bold, size: 16)
         $0.textColor = UIColor(hexString: "#656565")
         $0.sizeToFit()
     }
@@ -60,16 +64,17 @@ class PopupViewController: BaseViewController {
     override func addview() {
         self.view.addSubview(contentView)
         self.contentView.addSubview(nameLabel)
-        self.contentView.addSubview(locateIcon)
-        self.contentView.addSubview(locateLabel)
         self.contentView.addSubview(locateInfoLabel)
         self.contentView.addSubview(productTableView)
         self.contentView.addSubview(postBtn)
+        self.contentView.addSubview(locateSV)
+        self.locateSV.addArrangedSubview(locateIcon)
+        self.locateSV.addArrangedSubview(locateLabel)
     }
     
     override func layout() {
         self.contentView.snp.makeConstraints{
-            $0.height.equalTo(419)
+            $0.height.equalTo(485)
             $0.width.equalTo(327)
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview()
@@ -77,6 +82,26 @@ class PopupViewController: BaseViewController {
         self.nameLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(23)
             $0.leading.equalToSuperview().offset(20)
+        }
+        self.locateSV.snp.makeConstraints {
+            $0.top.equalTo(nameLabel.snp.bottom).offset(7)
+            $0.leading.equalToSuperview().offset(20)
+        }
+        self.locateInfoLabel.snp.makeConstraints {
+            $0.top.equalTo(nameLabel.snp.bottom).offset(7)
+            $0.leading.equalTo(locateSV.snp.trailing).offset(20)
+        }
+        self.productTableView.snp.makeConstraints {
+            $0.top.equalTo(locateSV.snp.bottom).offset(11)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(300)
+        }
+        self.postBtn.snp.makeConstraints {
+            $0.bottom.equalToSuperview().offset(-20)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(55)
         }
     }
     

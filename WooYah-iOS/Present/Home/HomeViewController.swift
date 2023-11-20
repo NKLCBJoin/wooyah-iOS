@@ -35,8 +35,16 @@ class HomeViewController: BaseViewController {
         $0.backgroundColor = .clear
     }
     private let writeBtn = UIButton().then {
-        $0.setImage(UIImage(systemName: "pencil"), for: .normal)
+        $0.setImage(UIImage(systemName: "plus"), for: .normal)
+        $0.setTitle("공고올리기", for: .normal)
+        $0.setTitleColor(UIColor.white, for: .normal)
+        $0.layer.cornerRadius = 20
+        $0.layer.shadowColor = UIColor.darkGray.cgColor
+        $0.layer.shadowRadius = 20
+
+        $0.titleLabel?.font = .pretendard(.Bold, size: 16)
         $0.tintColor = .white
+        $0.backgroundColor = UIColor(hexString: "#222222")
     }
     private let mainCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
         $0.register(CollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.identifier)
@@ -101,7 +109,7 @@ class HomeViewController: BaseViewController {
         self.topView.addSubview(welcomeLabel)
         self.view.addSubview(mainLabel)
         self.view.addSubview(mainCollectionView)
-        self.topView.addSubview(writeBtn)
+        self.view.addSubview(writeBtn)
         self.topView.addSubview(welecomImg)
         self.view.addSubview(locateLabel)
     }
@@ -126,9 +134,10 @@ class HomeViewController: BaseViewController {
             $0.height.equalTo(Const.itemSize.height + 30)
         }
         self.writeBtn.snp.makeConstraints {
-            $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+            $0.top.equalTo(self.locateLabel.snp.bottom).offset(50)
             $0.trailing.equalToSuperview().offset(-16)
-            $0.width.height.equalTo(25)
+            $0.width.equalTo(150)
+            $0.height.equalTo(50)
         }
         self.welecomImg.snp.makeConstraints {
             $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
