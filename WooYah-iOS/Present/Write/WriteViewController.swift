@@ -210,7 +210,6 @@ class WriteViewController: BaseViewController, UIScrollViewDelegate {
         self.CountBtnSV.addArrangedSubview(plusBtn)
         self.CountBtnSV.addArrangedSubview(minusBtn)
         self.contentView.addSubview(completeBtn)
-        
     }
     
     init(_ viewModel: WriteViewModel) {
