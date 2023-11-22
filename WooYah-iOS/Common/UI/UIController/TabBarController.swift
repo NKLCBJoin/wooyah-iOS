@@ -21,7 +21,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         vc2.tabBarItem.image = UIImage(systemName: "map")
         vc2.tabBarItem.selectedImage = UIImage(systemName: "map.fill")
         vc2.navigationBar.isHidden = true
-        let vc3 = UINavigationController(rootViewController: MyPageViewController())
+        let vc3 = UINavigationController(rootViewController: MyPageViewController(MyPageViewModel()))
         vc3.tabBarItem.selectedImage = UIImage(systemName: "person.fill")
         vc3.tabBarItem.image = UIImage(systemName: "person")
         vc3.navigationBar.isHidden = true

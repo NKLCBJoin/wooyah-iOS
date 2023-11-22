@@ -16,6 +16,7 @@ pod 'naveridlogin-sdk-ios'
 pod 'RxKakaoSDKCommon'  # 필수 요소를 담은 공통 모듈
 pod 'RxKakaoSDKAuth'  # 카카오 로그인
 pod 'RxKeyboard'
+pod 'RxDataSources'
 pod 'RxKakaoSDKUser'  # 사용자 관리
     pod 'SnapKit', '~> 5.6.0'
 pod 'Then'

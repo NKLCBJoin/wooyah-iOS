@@ -13,6 +13,7 @@ class MapViewModel:ViewModelType {
     var disposeBag = DisposeBag()
     let usecase: MapUsecaseProtocol
     let getCartList = PublishSubject<BaseResponse<MapDTO>>()
+    let getCartIds = PublishSubject<[CartListDTO]>()
     
     struct Input {
         
@@ -35,6 +36,7 @@ class MapViewModel:ViewModelType {
             .subscribe(onSuccess: { [weak self] info in
                 print(info)
                 self?.getCartList.onNext(info)
+                self?.getCartIds.onNext(info.result!.data)
             }, onFailure: { error in
                 print("MapVM에러 발생: \(error)")
             }
