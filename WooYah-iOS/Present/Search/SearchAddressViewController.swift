@@ -92,7 +92,6 @@ class SearchAddressViewController: UIViewController {
                     latitude = location.coordinate.latitude
                     longitude = location.coordinate.longitude
                     let coordinates = [latitude ?? 0.0, longitude ?? 0.0]
-                    print("서치뷰컨에서 \(coordinates)")
                     coordinate.onNext(coordinates)
 
                 } else {
