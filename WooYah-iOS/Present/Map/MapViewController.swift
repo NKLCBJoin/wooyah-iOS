@@ -16,9 +16,15 @@ class MapViewController: BaseViewController {
     
     let infoWindow = NMFInfoWindow()
     let datasource = NMFInfoWindowDefaultTextSource.data()
-    let marker = NMFMarker()
-    
+    private var marker: [NMFMarker] = []
+
     private let showCartList = PublishSubject<Bool>()
+    private let listCountLabel = UILabel().then {
+        $0.text = "현재 근처의 공고는 0개"
+        $0.font = .pretendard(.Regular, size: 14)
+        $0.textColor = .black
+        $0.sizeToFit()
+    }
     
     private let cartListTabelView = UITableView().then{
         $0.backgroundColor = .white
@@ -49,21 +55,25 @@ class MapViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.viewModel.updateMapCartList(latitude: 36.1451773, longitude: 128.393913)
+        self.viewModel.updateMapCartList(latitude: viewModel.lat.value, longitude: viewModel.lng.value)
     }
     
     override func configure() {
-        moveLocate(lat: 36.1451773, lng: 128.393913)
         naverMapView.isTiltGestureEnabled = false
         naverMapView.isRotateGestureEnabled = false
         naverMapView.touchDelegate = self
         cartListTabelView.isHidden = true
+        self.viewModel.lat.accept(36.145177)
+        self.viewModel.lng.accept(128.393913)
+        self.viewModel.updateMapCartList(latitude: 36.145177, longitude: 128.393913)
+        self.moveLocate(lat: 36.145177, lng: 128.393913)
     }
     
     override func addview() {
         self.view.addSubview(naverMapView)
         self.naverMapView.addSubview(searchBtn)
         self.naverMapView.addSubview(cartListTabelView)
+        self.naverMapView.addSubview(listCountLabel)
     }
     
     override func layout() {
@@ -80,10 +90,14 @@ class MapViewController: BaseViewController {
             $0.height.equalTo(42)
         }
         self.cartListTabelView.snp.makeConstraints { make in
-            make.top.equalTo(self.naverMapView.snp.top).offset(50) // 예시: 위에서 50 포인트 떨어진 위치
-            make.leading.equalTo(self.naverMapView.snp.leading).offset(16) // 예시: 왼쪽에서 16 포인트 떨어진 위치
+            make.top.equalTo(self.naverMapView.snp.top).offset(50)
+            make.leading.equalTo(self.naverMapView.snp.leading).offset(16)
             make.width.equalTo(100)
             make.height.equalTo(150)
+        }
+        self.listCountLabel.snp.makeConstraints {
+            $0.top.equalTo(searchBtn.snp.bottom).offset(5)
+            $0.centerX.equalToSuperview()
         }
     }
     
@@ -102,6 +116,9 @@ class MapViewController: BaseViewController {
                         guard let lat = coordinates.first, let lng = coordinates.last else {
                             return
                         }
+                        self.viewModel.lat.accept(lat)
+                        self.viewModel.lng.accept(lng)
+                        self.viewModel.updateMapCartList(latitude: lat, longitude: lng)
                         self.moveLocate(lat: lat, lng: lng)
                     })
                     .disposed(by: self.disposeBag)
@@ -117,30 +134,63 @@ class MapViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
-        viewModel.getCartList
-            .bind(onNext: { [weak self] cart in
-                self?.showCounts(count: cart.result?.count ?? 0)
-            }).disposed(by: disposeBag)
-        
-        viewModel.getCartIds
+        viewModel.duplicationCarts
             .bind(to: self.cartListTabelView.rx.items(cellIdentifier: DropDownTableViewCell.identifier, cellType:DropDownTableViewCell.self))
         {   index, item, cell in
-            print(item)
             cell.selectionStyle = .none
             cell.configureCell(item)
         }
             .disposed(by: disposeBag)
         
+        viewModel.getCartIds
+            .bind(onNext: { [weak self] cartList in
+                guard let self = self else { return }
+                var coordinateCounts: [String: Int] = [:]
+
+                self.listCountLabel.text = "현재 근처 올라온 공고는 \(cartList.count)개"
+                self.marker.forEach { $0.mapView = nil }
+                self.marker.removeAll()
+
+                for cart in cartList {
+                    let coordinateKey = "\(cart.latitude)_\(cart.longitude)"
+                    coordinateCounts[coordinateKey, default: 0] += 1
+
+                    let marker = NMFMarker()
+                    marker.position = NMGLatLng(lat: cart.latitude, lng: cart.longitude)
+                    marker.mapView = self.naverMapView
+                    marker.userInfo = [
+                        "cartId": cart.cartId,
+                        "latitude": cart.latitude,
+                        "longitude": cart.longitude
+                    ]
+                    self.marker.append(marker)
+
+                    if let count = coordinateCounts[coordinateKey], count > 1 {
+                        self.showCounts(count: count, marker: marker)
+                    }
+                }
+
+                self.cartListTabelView.reloadData()
+            })
+            .disposed(by: disposeBag)
+
+
+        
         self.showCartList
             .subscribe(onNext: { [weak self] shouldShow in
                 guard let self = self else { return }
                 if shouldShow {
+                    // Calculate the average marker position
+                    let markerPositions = self.getMarkerPositions()
+                    let averageX = markerPositions.map { $0.x }.reduce(0, +) / CGFloat(markerPositions.count)
+                    let averageY = markerPositions.map { $0.y }.reduce(0, +) / CGFloat(markerPositions.count)
+
                     // 마커 위치에 따라 동적으로 조절
-                    let markerPosition = self.getMarkerPosition()
                     self.cartListTabelView.snp.updateConstraints { make in
-                        make.top.equalTo(self.naverMapView.snp.top).offset(markerPosition.y)
-                        make.leading.equalTo(self.naverMapView.snp.leading).offset(markerPosition.x)
+                        make.top.equalTo(self.naverMapView.snp.top).offset(averageY)
+                        make.leading.equalTo(self.naverMapView.snp.leading).offset(averageX)
                     }
+
                     // 테이블뷰 나타내기
                     self.cartListTabelView.isHidden = false
                 } else {
@@ -152,26 +202,38 @@ class MapViewController: BaseViewController {
 
     }
     
-    private func showCounts(count: Int) {
-        let countStr = String(count) + "개"
+    private func showCounts(count: Int, marker: NMFMarker) {
+        let infoWindow = NMFInfoWindow()
+        let datasource = NMFInfoWindowDefaultTextSource.data()
+        
+        let countStr = "\(count)개"
         datasource.title = countStr
         infoWindow.dataSource = datasource
-        infoWindow.open(with: marker)
-    }
-    
-    private func moveLocate(lat:Double, lng:Double) {
-        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: lat, lng: lng))
-        cameraUpdate.animation = .easeIn
-        naverMapView.moveCamera(cameraUpdate)
-        marker.position = NMGLatLng(lat: lat, lng: lng)
-        marker.mapView = naverMapView
         infoWindow.alpha = 0.6
         infoWindow.open(with: marker)
     }
-    
-    private func getMarkerPosition() -> CGPoint {
-        let markerPoint = naverMapView.projection.point(from: marker.position)
-        return CGPoint(x: markerPoint.x, y: markerPoint.y)
+
+    private func moveLocate(lat: Double, lng: Double) {
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: lat, lng: lng))
+        cameraUpdate.animation = .easeIn
+        naverMapView.moveCamera(cameraUpdate)
+                
+    }
+
+    private func findMarkerForPosition(_ position: NMGLatLng) -> NMFMarker? {
+        for marker in marker {
+            if marker.position == position {
+                return marker
+            }
+        }
+        return nil
+    }
+
+    private func getMarkerPositions() -> [CGPoint] {
+        return marker.map { marker in
+            let markerPoint = naverMapView.projection.point(from: marker.position)
+            return CGPoint(x: markerPoint.x, y: markerPoint.y)
+        }
     }
 
     init(_ viewModel: MapViewModel) {
@@ -192,13 +254,31 @@ extension MapViewController {
 }
 extension MapViewController: NMFMapViewTouchDelegate {
     func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
-        marker.touchHandler = { (overlay: NMFOverlay) -> Bool in
-            print("마커 터치")
-            self.showCartList.onNext(true)
-            return true // 이벤트 소비, -mapView:didTapMap:point 이벤트는 발생하지 않음
+        // Remove existing touch handlers for all markers
+        marker.forEach { marker in
+            marker.touchHandler = nil
         }
+
+        // Set touch handler for all markers to show the cart list
+        marker.forEach { marker in
+            marker.touchHandler = { (overlay: NMFOverlay) -> Bool in
+                if let cartId = marker.userInfo["cartId"] as? Int {
+                    if marker.infoWindow != nil {
+                        self.showCartList.onNext(true)
+                    }
+                    else {
+                        self.showPopupViewController(id: cartId)
+                    }
+                }
+                return true
+            }
+        }
+
+        // If no marker is tapped, hide the cart list
         self.showCartList.onNext(false)
         print("지도 탭")
     }
 }
+
+
 
