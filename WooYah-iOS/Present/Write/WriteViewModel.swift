@@ -10,15 +10,21 @@ import RxSwift
 import RxCocoa
 
 class WriteViewModel:ViewModelType {
-    
     private let addedLocate = BehaviorRelay<Bool>(value: false)
     private let addedProduct = BehaviorRelay<Bool>(value: false)
     let progressBarProgress = BehaviorRelay<Float>(value: 0.1)
-    var productItems: BehaviorRelay<[String]> = BehaviorRelay(value: [])
-    private var currentProductText: String = ""
+    var productItems =  BehaviorRelay<[String]>(value: [])
+    private var currentProductText = ""
     var personCount = BehaviorRelay<Int>(value: 1)
-    let locate = PublishSubject<String>()
+    let locate = BehaviorRelay<String>(value: "")
+    private let usecase: ProductUseCaseProtocol
+    private let disposebag = DisposeBag()
+    let lat = BehaviorRelay<Double>(value: 0.0)
+    let lng = BehaviorRelay<Double>(value: 0.0)
 
+    var disposeBag = DisposeBag()
+
+    
     func increasePersonCount() {
         let currentCount = personCount.value
         personCount.accept(currentCount + 1)
@@ -56,19 +62,21 @@ class WriteViewModel:ViewModelType {
             self?.updateProgressBar()
         })
             .disposed(by: disposeBag)
+        
         input.productText
             .subscribe(onNext: { [weak self] text in
                 self?.currentProductText = text
             })
             .disposed(by: disposeBag)
+        
         input.productAddBtnTap
             .emit(onNext: { [weak self] in
-            print("추가")
             self?.addCurrentProductText()
             self?.addedProduct.accept(true)
             self?.updateProgressBar()
         })
             .disposed(by: disposeBag)
+        
         input.personAddBtnTap
             .emit(onNext: { [weak self] in
                 self?.increasePersonCount()
@@ -80,15 +88,37 @@ class WriteViewModel:ViewModelType {
                 self?.decreasePersonCount()
             })
             .disposed(by: disposeBag)
+        
+        input.completeBtnTap
+            .emit(onNext: { [weak self] in
+                let writeProduct = WriteProductDTO(
+                    location: self?.locate.value ?? "", // Assuming locate is a string
+                    participantNumber: self?.personCount.value ?? 2,
+                    latitude: self?.lat.value ?? 0.0, // Assuming lat is a double
+                    longitude: self?.lng.value ?? 0.0, // Assuming lng is a double
+                    products: self?.productItems.value ?? [""]
+                )
+                print(writeProduct)
+                self?.usecase.WriteCart(with: writeProduct)
+                    .subscribe { event in
+                         switch event {
+                         case .success(let response):
+                             // Handle success
+                             print("Success: \(response)")
+                         case .failure(let error):
+                             // Handle error
+                             print("Error: \(error)")
+                         }
+                     }
+                    .disposed(by:self!.disposeBag)
+            })
+            .disposed(by: disposeBag)
 
         return Output(productAdd: input.productText,personCount: personCount.asObservable())
     }
-    
-    var disposeBag: DisposeBag
-    
-
-    init(disposeBag: DisposeBag = DisposeBag()) {
-        self.disposeBag = disposeBag
+        
+    init(usecase: ProductUseCaseProtocol) {
+        self.usecase = usecase
     }
     
     struct Input {
@@ -97,6 +127,7 @@ class WriteViewModel:ViewModelType {
         let productAddBtnTap: Signal<Void>
         let personAddBtnTap: Signal<Void>
         let personMinusBtnTap: Signal<Void>
+        let completeBtnTap: Signal<Void>
     }
     struct Output {
         let productAdd: Observable<String>

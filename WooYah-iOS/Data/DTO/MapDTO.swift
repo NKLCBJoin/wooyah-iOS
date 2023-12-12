@@ -7,17 +7,17 @@
 
 import Foundation
 
-struct MapDTO: Codable {
+struct MapDTO: Decodable {
     let count: Int
     let data: [CartListDTO]
 }
-struct CartListDTO: Codable {
-    let cartId: Int  // "cartId"로 수정
+struct CartListDTO: Decodable {
+    let cartId: Int  
     let latitude: Double
     let longitude: Double
 
     enum CodingKeys: String, CodingKey {
-        case cartId = "cartId"  // JSON의 키와 속성명이 다르므로 CodingKeys를 사용하여 매핑
+        case cartId = "cartId"
         case latitude
         case longitude
     }

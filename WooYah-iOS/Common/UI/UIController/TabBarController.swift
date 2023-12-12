@@ -13,7 +13,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(hexString: "#FBFCFC")
         self.delegate = self
-        let vc1 = UINavigationController(rootViewController: HomeViewController(HomeViewModel()))
+        let vc1 = UINavigationController(rootViewController: HomeViewController(HomeViewModel(usecase: HomeUseCase(repsoitory: HomeRepository(service: HomeService())))))
         vc1.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
         vc1.navigationBar.isHidden = true
         vc1.tabBarItem.image = UIImage(systemName: "house")
@@ -21,7 +21,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         vc2.tabBarItem.image = UIImage(systemName: "map")
         vc2.tabBarItem.selectedImage = UIImage(systemName: "map.fill")
         vc2.navigationBar.isHidden = true
-        let vc3 = UINavigationController(rootViewController: MyPageViewController())
+        let vc3 = UINavigationController(rootViewController: MyPageViewController(MyPageViewModel(usecase: MyUseCase(repository: MyRepository(service: MyService())))))
         vc3.tabBarItem.selectedImage = UIImage(systemName: "person.fill")
         vc3.tabBarItem.image = UIImage(systemName: "person")
         vc3.navigationBar.isHidden = true

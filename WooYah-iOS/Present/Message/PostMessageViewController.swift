@@ -1,31 +1,47 @@
 //
-//  PopupViewController.swift
+//  PostMessageViewController.swift
 //  WooYah-iOS
 //
-//  Created by 최지철 on 2023/10/24.
+//  Created by 최지철 on 2023/12/03.
 //
 
 import UIKit
 
-class PopupViewController: BaseViewController {
+class PostMessageViewController: BaseViewController {
     
-    private let viewModel: PopupViewModel
-    
-    private let phoneNumLabel = UILabel().then {
-        $0.text = "판매자: 번호"
-        $0.font = .pretendard(.Regular, size: 16)
+    private let phoneNum = UILabel().then {
+        $0.text = "연락처: 010-xxxx-xxxx"
+        $0.font = .pretendard(.Regular, size: 14)
         $0.textColor = UIColor(hexString: "#484848")
         $0.sizeToFit()
     }
-        
+    private let rejectBtn = UIButton().then {
+        $0.titleLabel?.font = .pretendard(.Regular, size: 14)
+        $0.backgroundColor = UIColor(hexString: "#FF7D7D")
+        $0.setTitle("거절", for: .normal)
+        $0.setTitleColor(UIColor.white, for: .normal)
+        $0.layer.cornerRadius = 20
+    }
+    private let acceptBtn = UIButton().then {
+        $0.titleLabel?.font = .pretendard(.Regular, size: 14)
+        $0.backgroundColor = UIColor(hexString: "#656070")
+        $0.setTitle("수락", for: .normal)
+        $0.setTitleColor(UIColor.white, for: .normal)
+        $0.layer.cornerRadius = 20
+    }
     private let productTableView = UITableView(frame: CGRect.zero, style: .grouped).then{
         $0.backgroundColor = UIColor(hexString: "#E8EAF0")
         $0.layer.cornerRadius = 8
-        $0.register(ProductTableViewCell.self, forCellReuseIdentifier: ProductTableViewCell.identifier)
     }
     private let locateSV = UIStackView().then {
         $0.axis = .horizontal
         $0.spacing = 10
+    }
+    private let locateInfoLabel = UILabel().then {
+        $0.text = "동부 이촌동이마트"
+        $0.font = .pretendard(.Regular, size: 16)
+        $0.textColor = UIColor(hexString: "#484848")
+        $0.sizeToFit()
     }
     private let locateLabel = UILabel().then {
         $0.text = "장보는 장소"
@@ -49,16 +65,6 @@ class PopupViewController: BaseViewController {
         $0.layer.cornerRadius = 20
     }
     
-    init(viewModel: PopupViewModel, id: Int) {
-        self.viewModel = viewModel
-        viewModel.updateInfo(id: id)
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func configure() {
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         self.view.isOpaque = false
@@ -66,17 +72,19 @@ class PopupViewController: BaseViewController {
         self.view.addGestureRecognizer(tapGesture)
         let contentTapGesture = UITapGestureRecognizer(target: self, action: nil)
         contentView.addGestureRecognizer(contentTapGesture)
-        productTableView.delegate = self
     }
     
     override func addview() {
         self.view.addSubview(contentView)
         self.contentView.addSubview(nameLabel)
+        self.contentView.addSubview(locateInfoLabel)
         self.contentView.addSubview(productTableView)
-        self.contentView.addSubview(phoneNumLabel)
         self.contentView.addSubview(locateSV)
         self.locateSV.addArrangedSubview(locateIcon)
         self.locateSV.addArrangedSubview(locateLabel)
+        self.contentView.addSubview(phoneNum)
+        self.contentView.addSubview(acceptBtn)
+        self.contentView.addSubview(rejectBtn)
     }
     
     override func layout() {
@@ -94,47 +102,40 @@ class PopupViewController: BaseViewController {
             $0.top.equalTo(nameLabel.snp.bottom).offset(7)
             $0.leading.equalToSuperview().offset(20)
         }
+        self.locateInfoLabel.snp.makeConstraints {
+            $0.top.equalTo(nameLabel.snp.bottom).offset(7)
+            $0.leading.equalTo(locateSV.snp.trailing).offset(20)
+        }
         self.productTableView.snp.makeConstraints {
             $0.top.equalTo(locateSV.snp.bottom).offset(11)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(300)
         }
-        self.phoneNumLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().offset(-20)
+        self.phoneNum.snp.makeConstraints {
+            $0.top.equalTo(productTableView.snp.bottom).offset(11)
             $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalToSuperview().offset(-20)
-            $0.height.equalTo(55)
+
+        }
+        self.rejectBtn.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(12)
+            $0.leading.equalToSuperview().offset(40)
+            $0.width.equalTo(111)
+            $0.height.equalTo(48)
+        }
+        self.acceptBtn.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(12)
+            $0.trailing.equalToSuperview().inset(40)
+            $0.width.equalTo(111)
+            $0.height.equalTo(48)
         }
     }
     
     override func setupBinding() {
-
-        viewModel.detail
-            .bind(onNext: { [weak self] info in
-                self?.locateLabel.text = "장보는 장소: \(info.result?.shoppingLocation ?? "")"
-                self?.nameLabel.text = info.result?.nickname
-                self?.phoneNumLabel.text = "판매자:" + info.result!.ownerPhoneNumber
-            })
-            .disposed(by: disposeBag)
         
-        viewModel.productDetail
-            .bind(to: productTableView.rx.items(cellIdentifier: ProductTableViewCell.identifier, cellType: ProductTableViewCell.self)) { index, item, cell in
-                cell.configureCell(item,buy: true)
-            }
-            .disposed(by: disposeBag)
     }
     
     @objc private func handleTap() {
         self.dismiss(animated: false, completion: nil)
-    }
-}
-extension PopupViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return nil
-    }
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0.0
     }
 }

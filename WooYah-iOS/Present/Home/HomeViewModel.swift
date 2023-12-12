@@ -6,12 +6,17 @@
 //
 
 import Foundation
+
+import RxCocoa
 import RxSwift
 
 class HomeViewModel: ViewModelType {
     
     var disposeBag = DisposeBag()
-
+    
+    private let usecase: HomeUseCaseProtocol
+    let homeList = BehaviorRelay<[DetailInfo]>(value: [])
+    
     struct Input {
         
     }
@@ -19,13 +24,22 @@ class HomeViewModel: ViewModelType {
     struct Output {
         
     }
-    init(disposeBag: DisposeBag = DisposeBag()) {
-        self.disposeBag = disposeBag
+    
+    init(usecase: HomeUseCaseProtocol) {
+        self.usecase = usecase
     }
     
     func transform(input: Input) -> Output {
         let output = Output()
         
         return output
+    }
+    
+    func updateProductList(){
+        usecase.fetchHomeProductList()
+            .subscribe(onSuccess: {  [weak self]  list in
+                self?.homeList.accept((list.result?.data)!)
+            })
+            .disposed(by: disposeBag)
     }
 }

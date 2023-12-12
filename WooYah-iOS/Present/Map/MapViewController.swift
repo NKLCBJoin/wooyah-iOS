@@ -8,6 +8,7 @@
 import UIKit
 import NMapsMap
 import RxCocoa
+import RxSwift
 
 class MapViewController: BaseViewController {
     
@@ -16,8 +17,20 @@ class MapViewController: BaseViewController {
     let infoWindow = NMFInfoWindow()
     let datasource = NMFInfoWindowDefaultTextSource.data()
     let marker = NMFMarker()
-
     
+    private let showCartList = PublishSubject<Bool>()
+    
+    private let cartListTabelView = UITableView().then{
+        $0.backgroundColor = .white
+        $0.register(DropDownTableViewCell.self, forCellReuseIdentifier: DropDownTableViewCell.identifier)
+        $0.layer.shadowColor = UIColor.darkGray.cgColor
+        $0.layer.shadowOpacity = 0.5
+        $0.layer.cornerRadius = 5
+        $0.layer.shadowRadius = 5 //반경
+        $0.layer.masksToBounds = false
+        $0.layer.shadowOffset = CGSize(width: 0, height: 5)
+        
+    }
     private let searchBtn = UIButton().then {
         $0.backgroundColor = UIColor(hexString: "#CCCCCC").withAlphaComponent(0.6)
         $0.setTitle(" 장소를 검색해주세요.", for: .normal)
@@ -36,7 +49,7 @@ class MapViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.viewModel.updateMapCartList()
+        self.viewModel.updateMapCartList(latitude: 36.1451773, longitude: 128.393913)
     }
     
     override func configure() {
@@ -44,11 +57,13 @@ class MapViewController: BaseViewController {
         naverMapView.isTiltGestureEnabled = false
         naverMapView.isRotateGestureEnabled = false
         naverMapView.touchDelegate = self
+        cartListTabelView.isHidden = true
     }
     
     override func addview() {
         self.view.addSubview(naverMapView)
         self.naverMapView.addSubview(searchBtn)
+        self.naverMapView.addSubview(cartListTabelView)
     }
     
     override func layout() {
@@ -64,6 +79,12 @@ class MapViewController: BaseViewController {
             $0.trailing.equalToSuperview().offset(-16)
             $0.height.equalTo(42)
         }
+        self.cartListTabelView.snp.makeConstraints { make in
+            make.top.equalTo(self.naverMapView.snp.top).offset(50) // 예시: 위에서 50 포인트 떨어진 위치
+            make.leading.equalTo(self.naverMapView.snp.leading).offset(16) // 예시: 왼쪽에서 16 포인트 떨어진 위치
+            make.width.equalTo(100)
+            make.height.equalTo(150)
+        }
     }
     
     override func setupBinding() {
@@ -78,8 +99,6 @@ class MapViewController: BaseViewController {
                 vc.coordinateSubject
                     .subscribe(onNext: { [weak self] coordinates in
                         guard let self = self else { return }
-
-                        print("Coordinate Updated: \(coordinates)")
                         guard let lat = coordinates.first, let lng = coordinates.last else {
                             return
                         }
@@ -92,10 +111,44 @@ class MapViewController: BaseViewController {
             .drive(searchBtn.rx.title(for: .normal))
             .disposed(by: disposeBag)
         
+        self.cartListTabelView.rx.modelSelected(CartListDTO.self)
+            .bind(onNext: { [weak self] cell in
+                self?.showPopupViewController(id: cell.cartId)
+            })
+            .disposed(by: disposeBag)
+        
         viewModel.getCartList
             .bind(onNext: { [weak self] cart in
                 self?.showCounts(count: cart.result?.count ?? 0)
             }).disposed(by: disposeBag)
+        
+        viewModel.getCartIds
+            .bind(to: self.cartListTabelView.rx.items(cellIdentifier: DropDownTableViewCell.identifier, cellType:DropDownTableViewCell.self))
+        {   index, item, cell in
+            print(item)
+            cell.selectionStyle = .none
+            cell.configureCell(item)
+        }
+            .disposed(by: disposeBag)
+        
+        self.showCartList
+            .subscribe(onNext: { [weak self] shouldShow in
+                guard let self = self else { return }
+                if shouldShow {
+                    // 마커 위치에 따라 동적으로 조절
+                    let markerPosition = self.getMarkerPosition()
+                    self.cartListTabelView.snp.updateConstraints { make in
+                        make.top.equalTo(self.naverMapView.snp.top).offset(markerPosition.y)
+                        make.leading.equalTo(self.naverMapView.snp.leading).offset(markerPosition.x)
+                    }
+                    // 테이블뷰 나타내기
+                    self.cartListTabelView.isHidden = false
+                } else {
+                    // 테이블뷰 숨기기
+                    self.cartListTabelView.isHidden = true
+                }
+            })
+            .disposed(by: disposeBag)
 
     }
     
@@ -115,6 +168,11 @@ class MapViewController: BaseViewController {
         infoWindow.alpha = 0.6
         infoWindow.open(with: marker)
     }
+    
+    private func getMarkerPosition() -> CGPoint {
+        let markerPoint = naverMapView.projection.point(from: marker.position)
+        return CGPoint(x: markerPoint.x, y: markerPoint.y)
+    }
 
     init(_ viewModel: MapViewModel) {
         self.viewModel = viewModel
@@ -125,12 +183,22 @@ class MapViewController: BaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
 }
+extension MapViewController {
+    private func showPopupViewController(id: Int) {
+        let vc = PopupViewController(viewModel: PopupViewModel(usecase:ProductUseCase(repository: ProductRepository(service: ProductService()))), id: id)
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc,animated: false,completion: nil)
+    }
+}
 extension MapViewController: NMFMapViewTouchDelegate {
     func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
         marker.touchHandler = { (overlay: NMFOverlay) -> Bool in
             print("마커 터치")
+            self.showCartList.onNext(true)
             return true // 이벤트 소비, -mapView:didTapMap:point 이벤트는 발생하지 않음
         }
+        self.showCartList.onNext(false)
         print("지도 탭")
     }
 }
+

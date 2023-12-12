@@ -7,10 +7,13 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 class MyPageViewModel:ViewModelType {
     var disposeBag = DisposeBag()
-    
+    private let usecase: MyUseCaseProtocol
+    let myList = BehaviorRelay<[ProductInfoDTO]>(value: [])
+
     struct Input {
         
     }
@@ -18,8 +21,9 @@ class MyPageViewModel:ViewModelType {
     struct Output {
         
     }
-    init(disposeBag: DisposeBag = DisposeBag()) {
-        self.disposeBag = disposeBag
+    
+    init(usecase: MyUseCaseProtocol) {
+        self.usecase = usecase
     }
     
     func transform(input: Input) -> Output {
@@ -27,4 +31,22 @@ class MyPageViewModel:ViewModelType {
         
         return output
     }
+    
+    func updateMyList(jwt: String) {
+        usecase.fetchMyCarts(jwt: jwt)
+            .subscribe(onSuccess: { [weak self]  info  in
+                self?.myList.accept(info.result!.data)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+
+    func deleteItem(cartId: Int) {
+        usecase.deleteCart(id: cartId)
+            .subscribe(onSuccess: {  [weak self]  info in
+                self?.myList.accept(self?.myList.value.filter { $0.cartId != cartId } ?? [])
+            })
+            .disposed(by: disposeBag)
+    }
+
 }

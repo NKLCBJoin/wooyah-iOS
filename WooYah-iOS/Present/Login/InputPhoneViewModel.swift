@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class InputPhoneViewModel: ViewModelType {
+final class InputPhoneViewModel: ViewModelType {
     var disposeBag: DisposeBag
     private let userinfo = UserInfo.self
     private let registerPublisher = PublishSubject<Void>()

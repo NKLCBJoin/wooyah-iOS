@@ -9,15 +9,14 @@ import Foundation
 import RxSwift
 
 protocol MapRepositoryInterface {
-    func getMapCartList() -> Single<BaseResponse<MapDTO>>
+   func getMapCartList(latitude:Double, longitude:Double) -> Single<BaseResponse<MapDTO>>
 }
-
-class MapRepository: MapRepositoryInterface {
+final class MapRepository: MapRepositoryInterface {
     
     private let mapService : MapService
     
-    func getMapCartList() -> RxSwift.Single<BaseResponse<MapDTO>> {
-        return mapService.getMapCartList()
+    func getMapCartList(latitude: Double, longitude: Double) -> RxSwift.Single<BaseResponse<MapDTO>> {
+        return mapService.getMapCartList(latitude: latitude, longitude: longitude)
     }
     
     init(mapService: MapService) {

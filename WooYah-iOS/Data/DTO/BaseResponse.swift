@@ -20,3 +20,4 @@ struct BaseArrayResponse<Result: Decodable>: Decodable {
     let message: String
     let result: [Result]?
 }
+struct Empty: Decodable {}

@@ -25,11 +25,12 @@ struct LoginInfo {
     var id: String?
 }
 
-class LoginViewModel: NSObject, ViewModelType {
+final class LoginViewModel: NSObject, ViewModelType {
     
     var disposeBag = DisposeBag()
     let naverLoginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
     let kakaoLoginCompleteSubject = PublishSubject<Void>()
+    var usecase: LoginUseCase
     private let locationManager = CLLocationManager.init()
     private let userinfo = UserInfo.self
     
@@ -41,7 +42,8 @@ class LoginViewModel: NSObject, ViewModelType {
 
     }
     
-    override init() {
+    init(_ usercase: LoginUseCase) {
+        self.usecase = usercase
         super.init()
         naverLoginInstance?.delegate = self
         locationManager.delegate = self
@@ -79,14 +81,19 @@ class LoginViewModel: NSObject, ViewModelType {
     private func getKakaUserInfo() {
         UserApi.shared.rx.me()
             .subscribe (onSuccess:{ user in
-                print("me() success.")
-
                 //do something
                 let userName = user.kakaoAccount?.profile?.nickname
                 let userEmail = user.kakaoAccount?.email
                 let userBirthday = user.kakaoAccount?.birthday
-
+                let request = (LoginUserRequest(email: userEmail, nickname: userName, location: "양호동", phone: "010-2978-0086", device_number: ""))
                 self.userinfo.shared.name = userName
+                self.usecase.requestLogin(user: request)
+                    .subscribe(onSuccess: { response in
+                        print("Login success: \(response)")
+                    }, onFailure: { error in
+                        print("Login error: \(error)")
+                    })
+                    .disposed(by: self.disposeBag)
                 self.kakaoLoginCompleteSubject.onNext(())
                 
             }, onFailure: {error in

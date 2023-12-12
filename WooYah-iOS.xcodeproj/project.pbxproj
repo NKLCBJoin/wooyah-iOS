@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0900E3CC2B0DE0DA00E480C7 /* PushEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0900E3CB2B0DE0DA00E480C7 /* PushEnum.swift */; };
+		0900E3CE2B0DF33100E480C7 /* PopupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0900E3CD2B0DF33100E480C7 /* PopupViewModel.swift */; };
 		0903B0522ADED471009DA000 /* InputPhoneNumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0903B0512ADED471009DA000 /* InputPhoneNumViewController.swift */; };
 		0903B0552ADED4E0009DA000 /* CustomNaviBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0903B0542ADED4E0009DA000 /* CustomNaviBar.swift */; };
 		0903B0572ADED96C009DA000 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0903B0562ADED96C009DA000 /* BaseView.swift */; };
@@ -17,7 +19,15 @@
 		0909A5CB2AE7EDBE004D6E99 /* InputPhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0909A5CA2AE7EDBE004D6E99 /* InputPhoneViewModel.swift */; };
 		091F12042B08637E00878E73 /* APIConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091F12032B08637E00878E73 /* APIConstant.swift */; };
 		091F12062B0865FA00878E73 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091F12052B0865FA00878E73 /* BaseResponse.swift */; };
+		0926A9D52B0CEA8C004E3D00 /* DropDownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0926A9D42B0CEA8C004E3D00 /* DropDownTableViewCell.swift */; };
+		0926A9D72B0D07C4004E3D00 /* MyProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0926A9D62B0D07C4004E3D00 /* MyProductTableViewCell.swift */; };
+		0926A9D92B0D156F004E3D00 /* dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0926A9D82B0D156F004E3D00 /* dummy.swift */; };
 		0936AB2D2AF1359600DD321F /* SearchAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0936AB2C2AF1359600DD321F /* SearchAddressViewController.swift */; };
+		093A43AA2B26B05A00AD9EB3 /* WriteProductDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093A43A92B26B05A00AD9EB3 /* WriteProductDTO.swift */; };
+		093A43AC2B27374500AD9EB3 /* HomeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093A43AB2B27374500AD9EB3 /* HomeDTO.swift */; };
+		093A43AE2B27417F00AD9EB3 /* HomeRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093A43AD2B27417F00AD9EB3 /* HomeRepositoryType.swift */; };
+		093A43B02B2741A000AD9EB3 /* HomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093A43AF2B2741A000AD9EB3 /* HomeRepository.swift */; };
+		093A43B22B27421200AD9EB3 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093A43B12B27421200AD9EB3 /* HomeUseCase.swift */; };
 		094A91822B0273A40080C03A /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094A91812B0273A40080C03A /* MapViewModel.swift */; };
 		094A91852B03B7ED0080C03A /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094A91842B03B7ED0080C03A /* MyPageViewModel.swift */; };
 		0950FA162AD951A60038A20E /* ErrorTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0950FA152AD951A60038A20E /* ErrorTracker.swift */; };
@@ -44,8 +54,26 @@
 		09798A292AF6A2A70078AD6F /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09798A282AF6A2A60078AD6F /* ProductTableViewCell.swift */; };
 		097D052F2ADFB725009D4DAD /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097D052E2ADFB725009D4DAD /* String+.swift */; };
 		097D05332ADFEFC3009D4DAD /* Button+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097D05322ADFEFC3009D4DAD /* Button+.swift */; };
+		09800F782B24113B00FCBEF5 /* MyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09800F772B24113B00FCBEF5 /* MyService.swift */; };
+		09800F7A2B24142000FCBEF5 /* MyCartDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09800F792B24142000FCBEF5 /* MyCartDTO.swift */; };
+		09800F7C2B256DE400FCBEF5 /* MyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09800F7B2B256DE400FCBEF5 /* MyRepository.swift */; };
+		09800F7E2B256E0100FCBEF5 /* MyRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09800F7D2B256E0100FCBEF5 /* MyRepositoryType.swift */; };
+		09800F802B256ED400FCBEF5 /* MyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09800F7F2B256ED400FCBEF5 /* MyUseCase.swift */; };
+		09817E042B18767B00FA663C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 09817E032B18767B00FA663C /* GoogleService-Info.plist */; };
+		09ACDB072B1C7CDA0065D8E4 /* GetMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ACDB062B1C7CDA0065D8E4 /* GetMessageViewController.swift */; };
+		09ACDB092B1C7CE80065D8E4 /* PostMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ACDB082B1C7CE80065D8E4 /* PostMessageViewController.swift */; };
+		09ADB67E2B22EEA7002A0D60 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ADB67D2B22EEA7002A0D60 /* Utils.swift */; };
 		09BAC6D22AB18FB90072BB16 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BAC6D12AB18FB90072BB16 /* HomeViewController.swift */; };
 		09BAC6D42AB18FC60072BB16 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BAC6D32AB18FC60072BB16 /* LoginViewController.swift */; };
+		09C539CB2B1ED7B300563E70 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C539CA2B1ED7B300563E70 /* LoginService.swift */; };
+		09C539CF2B1EE08900563E70 /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C539CE2B1EE08800563E70 /* LoginRepository.swift */; };
+		09C539D22B1EE26D00563E70 /* LoginRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C539D12B1EE26D00563E70 /* LoginRepositoryType.swift */; };
+		09C539D42B1EE4DB00563E70 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C539D32B1EE4DB00563E70 /* LoginUseCase.swift */; };
+		09C539D62B1F1F2600563E70 /* ProductRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C539D52B1F1F2600563E70 /* ProductRepository.swift */; };
+		09C539D82B1F261C00563E70 /* ProductRepositortyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C539D72B1F261C00563E70 /* ProductRepositortyType.swift */; };
+		09C539DA2B1F2B7000563E70 /* ProductDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C539D92B1F2B7000563E70 /* ProductDTO.swift */; };
+		09C539DC2B1F2C6100563E70 /* ProductService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C539DB2B1F2C6100563E70 /* ProductService.swift */; };
+		09C539DE2B1F374F00563E70 /* ProductUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C539DD2B1F374F00563E70 /* ProductUseCase.swift */; };
 		09C59E692AD7C95600A631A7 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C59E682AD7C95600A631A7 /* MapViewController.swift */; };
 		09C59E6C2AD7C96500A631A7 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C59E6B2AD7C96500A631A7 /* MyPageViewController.swift */; };
 		09E2D2A02B0B57A6009B0D51 /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E2D29F2B0B57A6009B0D51 /* HomeService.swift */; };
@@ -61,6 +89,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0900E3CB2B0DE0DA00E480C7 /* PushEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushEnum.swift; sourceTree = "<group>"; };
+		0900E3CD2B0DF33100E480C7 /* PopupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewModel.swift; sourceTree = "<group>"; };
 		0903B0502ADE9547009DA000 /* WooYah-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WooYah-iOS.entitlements"; sourceTree = "<group>"; };
 		0903B0512ADED471009DA000 /* InputPhoneNumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPhoneNumViewController.swift; sourceTree = "<group>"; };
 		0903B0542ADED4E0009DA000 /* CustomNaviBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNaviBar.swift; sourceTree = "<group>"; };
@@ -72,7 +102,15 @@
 		0909A5CA2AE7EDBE004D6E99 /* InputPhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPhoneViewModel.swift; sourceTree = "<group>"; };
 		091F12032B08637E00878E73 /* APIConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstant.swift; sourceTree = "<group>"; };
 		091F12052B0865FA00878E73 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
+		0926A9D42B0CEA8C004E3D00 /* DropDownTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownTableViewCell.swift; sourceTree = "<group>"; };
+		0926A9D62B0D07C4004E3D00 /* MyProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProductTableViewCell.swift; sourceTree = "<group>"; };
+		0926A9D82B0D156F004E3D00 /* dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummy.swift; sourceTree = "<group>"; };
 		0936AB2C2AF1359600DD321F /* SearchAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddressViewController.swift; sourceTree = "<group>"; };
+		093A43A92B26B05A00AD9EB3 /* WriteProductDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteProductDTO.swift; sourceTree = "<group>"; };
+		093A43AB2B27374500AD9EB3 /* HomeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDTO.swift; sourceTree = "<group>"; };
+		093A43AD2B27417F00AD9EB3 /* HomeRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepositoryType.swift; sourceTree = "<group>"; };
+		093A43AF2B2741A000AD9EB3 /* HomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepository.swift; sourceTree = "<group>"; };
+		093A43B12B27421200AD9EB3 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
 		094A91812B0273A40080C03A /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		094A91842B03B7ED0080C03A /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		0950FA152AD951A60038A20E /* ErrorTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTracker.swift; sourceTree = "<group>"; };
@@ -101,8 +139,26 @@
 		09798A282AF6A2A60078AD6F /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		097D052E2ADFB725009D4DAD /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		097D05322ADFEFC3009D4DAD /* Button+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button+.swift"; sourceTree = "<group>"; };
+		09800F772B24113B00FCBEF5 /* MyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyService.swift; sourceTree = "<group>"; };
+		09800F792B24142000FCBEF5 /* MyCartDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCartDTO.swift; sourceTree = "<group>"; };
+		09800F7B2B256DE400FCBEF5 /* MyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRepository.swift; sourceTree = "<group>"; };
+		09800F7D2B256E0100FCBEF5 /* MyRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRepositoryType.swift; sourceTree = "<group>"; };
+		09800F7F2B256ED400FCBEF5 /* MyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUseCase.swift; sourceTree = "<group>"; };
+		09817E032B18767B00FA663C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		09ACDB062B1C7CDA0065D8E4 /* GetMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMessageViewController.swift; sourceTree = "<group>"; };
+		09ACDB082B1C7CE80065D8E4 /* PostMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMessageViewController.swift; sourceTree = "<group>"; };
+		09ADB67D2B22EEA7002A0D60 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		09BAC6D12AB18FB90072BB16 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		09BAC6D32AB18FC60072BB16 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		09C539CA2B1ED7B300563E70 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		09C539CE2B1EE08800563E70 /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
+		09C539D12B1EE26D00563E70 /* LoginRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepositoryType.swift; sourceTree = "<group>"; };
+		09C539D32B1EE4DB00563E70 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		09C539D52B1F1F2600563E70 /* ProductRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRepository.swift; sourceTree = "<group>"; };
+		09C539D72B1F261C00563E70 /* ProductRepositortyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRepositortyType.swift; sourceTree = "<group>"; };
+		09C539D92B1F2B7000563E70 /* ProductDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDTO.swift; sourceTree = "<group>"; };
+		09C539DB2B1F2C6100563E70 /* ProductService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductService.swift; sourceTree = "<group>"; };
+		09C539DD2B1F374F00563E70 /* ProductUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductUseCase.swift; sourceTree = "<group>"; };
 		09C59E682AD7C95600A631A7 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		09C59E6B2AD7C96500A631A7 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		09E2D29F2B0B57A6009B0D51 /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
@@ -135,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				0909A5BF2AE7C0F3004D6E99 /* PopupViewController.swift */,
+				0900E3CD2B0DF33100E480C7 /* PopupViewModel.swift */,
 			);
 			path = Popup;
 			sourceTree = "<group>";
@@ -162,6 +219,9 @@
 				091F12032B08637E00878E73 /* APIConstant.swift */,
 				09E2D29F2B0B57A6009B0D51 /* HomeService.swift */,
 				09E2D2A12B0B57C8009B0D51 /* MapService.swift */,
+				09C539CA2B1ED7B300563E70 /* LoginService.swift */,
+				09C539DB2B1F2C6100563E70 /* ProductService.swift */,
+				09800F772B24113B00FCBEF5 /* MyService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -185,9 +245,13 @@
 		0950FA172AD9A3B20038A20E /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				091F12052B0865FA00878E73 /* BaseResponse.swift */,
 				0950FA182AD9A3C20038A20E /* LoginDTO.swift */,
 				09E2D2A92B0B5C94009B0D51 /* MapDTO.swift */,
-				091F12052B0865FA00878E73 /* BaseResponse.swift */,
+				09C539D92B1F2B7000563E70 /* ProductDTO.swift */,
+				09800F792B24142000FCBEF5 /* MyCartDTO.swift */,
+				093A43A92B26B05A00AD9EB3 /* WriteProductDTO.swift */,
+				093A43AB2B27374500AD9EB3 /* HomeDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -224,6 +288,7 @@
 				0903B0502ADE9547009DA000 /* WooYah-iOS.entitlements */,
 				0950FA142AD951940038A20E /* Utility */,
 				0952E45E2AB02BBB00AEA429 /* Info.plist */,
+				09817E032B18767B00FA663C /* GoogleService-Info.plist */,
 				09555CE42AB1C5D000974A2E /* Resource */,
 				09BAC6CA2AB18AE10072BB16 /* APP */,
 				09BAC6CB2AB18B140072BB16 /* Common */,
@@ -272,7 +337,7 @@
 		0969A53E2B049F9B00883862 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				09E2D2A32B0B5AD8009B0D51 /* UseCase */,
+				09C539D02B1EE25400563E70 /* Interfaces */,
 				09EB04E62AE40C8200F23C4A /* Model */,
 			);
 			path = Domain;
@@ -290,6 +355,23 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		09ACDB052B1C7C510065D8E4 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				09ACDB062B1C7CDA0065D8E4 /* GetMessageViewController.swift */,
+				09ACDB082B1C7CE80065D8E4 /* PostMessageViewController.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		09ADB67C2B22EE9B002A0D60 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				09ADB67D2B22EEA7002A0D60 /* Utils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		09BAC6CA2AB18AE10072BB16 /* APP */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,6 +385,7 @@
 		09BAC6CB2AB18B140072BB16 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				09ADB67C2B22EE9B002A0D60 /* Utils */,
 				097D052D2ADFB716009D4DAD /* Extension */,
 				0950FA1A2AD9A4B30038A20E /* Error */,
 				09555CFB2AB1E97E00974A2E /* Protocol */,
@@ -323,7 +406,6 @@
 		09BAC6CD2AB18EDD0072BB16 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				09EB04E92AE5736C00F23C4A /* Cell */,
 				09FA83E92AB7012A00A8CFA8 /* UIController */,
 				09BAC6CC2AB18EC70072BB16 /* Base */,
 			);
@@ -333,6 +415,8 @@
 		09BAC6CE2AB18F7A0072BB16 /* Present */ = {
 			isa = PBXGroup;
 			children = (
+				09ACDB052B1C7C510065D8E4 /* Message */,
+				09EB04E92AE5736C00F23C4A /* Cell */,
 				094A91832B03A0060080C03A /* Search */,
 				0909A5C12AE7CB4C004D6E99 /* Write */,
 				0909A5BE2AE7C0D0004D6E99 /* Popup */,
@@ -364,6 +448,18 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		09C539D02B1EE25400563E70 /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				09C539D12B1EE26D00563E70 /* LoginRepositoryType.swift */,
+				09C539D72B1F261C00563E70 /* ProductRepositortyType.swift */,
+				09800F7D2B256E0100FCBEF5 /* MyRepositoryType.swift */,
+				093A43AD2B27417F00AD9EB3 /* HomeRepositoryType.swift */,
+				09E2D2A32B0B5AD8009B0D51 /* UseCase */,
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
 		09C59E672AD7C94700A631A7 /* Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -386,6 +482,10 @@
 			isa = PBXGroup;
 			children = (
 				09E2D2A42B0B5AEA009B0D51 /* MapUseCase.swift */,
+				09C539D32B1EE4DB00563E70 /* LoginUseCase.swift */,
+				09C539DD2B1F374F00563E70 /* ProductUseCase.swift */,
+				09800F7F2B256ED400FCBEF5 /* MyUseCase.swift */,
+				093A43B12B27421200AD9EB3 /* HomeUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -394,6 +494,10 @@
 			isa = PBXGroup;
 			children = (
 				09E2D2A72B0B5B1B009B0D51 /* MapRepository.swift */,
+				09C539CE2B1EE08800563E70 /* LoginRepository.swift */,
+				09C539D52B1F1F2600563E70 /* ProductRepository.swift */,
+				09800F7B2B256DE400FCBEF5 /* MyRepository.swift */,
+				093A43AF2B2741A000AD9EB3 /* HomeRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -402,6 +506,8 @@
 			isa = PBXGroup;
 			children = (
 				09EB04E72AE40C9500F23C4A /* UserInfo.swift */,
+				0926A9D82B0D156F004E3D00 /* dummy.swift */,
+				0900E3CB2B0DE0DA00E480C7 /* PushEnum.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -411,6 +517,8 @@
 			children = (
 				09EB04EA2AE5737C00F23C4A /* CollectionViewCell.swift */,
 				09798A282AF6A2A60078AD6F /* ProductTableViewCell.swift */,
+				0926A9D42B0CEA8C004E3D00 /* DropDownTableViewCell.swift */,
+				0926A9D62B0D07C4004E3D00 /* MyProductTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -501,6 +609,7 @@
 				09555CF22AB1C61100974A2E /* SUIT-Heavy.ttf in Resources */,
 				0952E45D2AB02BBB00AEA429 /* LaunchScreen.storyboard in Resources */,
 				09555CF52AB1C61100974A2E /* SUIT-ExtraBold.ttf in Resources */,
+				09817E042B18767B00FA663C /* GoogleService-Info.plist in Resources */,
 				09555CF82AB1C61100974A2E /* SUIT-ExtraLight.ttf in Resources */,
 				09555CF02AB1C61100974A2E /* SUIT-Light.ttf in Resources */,
 				0952E45A2AB02BBB00AEA429 /* Assets.xcassets in Resources */,
@@ -556,43 +665,70 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09ACDB072B1C7CDA0065D8E4 /* GetMessageViewController.swift in Sources */,
+				09800F7E2B256E0100FCBEF5 /* MyRepositoryType.swift in Sources */,
 				094A91822B0273A40080C03A /* MapViewModel.swift in Sources */,
+				09800F802B256ED400FCBEF5 /* MyUseCase.swift in Sources */,
 				0950FA1C2AD9A4BD0038A20E /* AuthError.swift in Sources */,
 				09E2D2AA2B0B5C94009B0D51 /* MapDTO.swift in Sources */,
 				09555CE62AB1C5E600974A2E /* Fonts.swift in Sources */,
+				0926A9D92B0D156F004E3D00 /* dummy.swift in Sources */,
 				097D052F2ADFB725009D4DAD /* String+.swift in Sources */,
 				09E2D2A52B0B5AEA009B0D51 /* MapUseCase.swift in Sources */,
+				09ACDB092B1C7CE80065D8E4 /* PostMessageViewController.swift in Sources */,
+				0926A9D52B0CEA8C004E3D00 /* DropDownTableViewCell.swift in Sources */,
 				0952E4552AB02BB600AEA429 /* BaseViewController.swift in Sources */,
 				09E2D2A82B0B5B1B009B0D51 /* MapRepository.swift in Sources */,
 				0909A5C52AE7D6B5004D6E99 /* WriteViewModel.swift in Sources */,
+				09C539D22B1EE26D00563E70 /* LoginRepositoryType.swift in Sources */,
 				09555CE32AB1C54F00974A2E /* Colors.swift in Sources */,
+				09800F782B24113B00FCBEF5 /* MyService.swift in Sources */,
 				09FA83E82AB700A400A8CFA8 /* TabBarController.swift in Sources */,
 				09EB04EB2AE5737C00F23C4A /* CollectionViewCell.swift in Sources */,
+				093A43AC2B27374500AD9EB3 /* HomeDTO.swift in Sources */,
+				09C539DC2B1F2C6100563E70 /* ProductService.swift in Sources */,
 				097D05332ADFEFC3009D4DAD /* Button+.swift in Sources */,
+				0926A9D72B0D07C4004E3D00 /* MyProductTableViewCell.swift in Sources */,
 				0952E4512AB02BB600AEA429 /* AppDelegate.swift in Sources */,
 				0936AB2D2AF1359600DD321F /* SearchAddressViewController.swift in Sources */,
 				09555CFA2AB1E91C00974A2E /* LoginViewModel.swift in Sources */,
+				09C539D82B1F261C00563E70 /* ProductRepositortyType.swift in Sources */,
 				09FA83F42AB720ED00A8CFA8 /* HomeViewModel.swift in Sources */,
 				09E2D2A02B0B57A6009B0D51 /* HomeService.swift in Sources */,
+				093A43AE2B27417F00AD9EB3 /* HomeRepositoryType.swift in Sources */,
 				0909A5C92AE7E20C004D6E99 /* NSMutableAttributedString+.swift in Sources */,
 				0950FA162AD951A60038A20E /* ErrorTracker.swift in Sources */,
 				09C59E6C2AD7C96500A631A7 /* MyPageViewController.swift in Sources */,
 				09C59E692AD7C95600A631A7 /* MapViewController.swift in Sources */,
+				09800F7C2B256DE400FCBEF5 /* MyRepository.swift in Sources */,
 				09798A292AF6A2A70078AD6F /* ProductTableViewCell.swift in Sources */,
+				09ADB67E2B22EEA7002A0D60 /* Utils.swift in Sources */,
+				09C539D42B1EE4DB00563E70 /* LoginUseCase.swift in Sources */,
 				0903B0522ADED471009DA000 /* InputPhoneNumViewController.swift in Sources */,
+				093A43B02B2741A000AD9EB3 /* HomeRepository.swift in Sources */,
 				0903B0552ADED4E0009DA000 /* CustomNaviBar.swift in Sources */,
+				093A43B22B27421200AD9EB3 /* HomeUseCase.swift in Sources */,
 				0952E4532AB02BB600AEA429 /* SceneDelegate.swift in Sources */,
 				09BAC6D42AB18FC60072BB16 /* LoginViewController.swift in Sources */,
 				0909A5C32AE7CB59004D6E99 /* WriteViewController.swift in Sources */,
 				09BAC6D22AB18FB90072BB16 /* HomeViewController.swift in Sources */,
+				09C539DA2B1F2B7000563E70 /* ProductDTO.swift in Sources */,
 				09E2D2A22B0B57C8009B0D51 /* MapService.swift in Sources */,
 				091F12062B0865FA00878E73 /* BaseResponse.swift in Sources */,
+				09C539D62B1F1F2600563E70 /* ProductRepository.swift in Sources */,
+				0900E3CE2B0DF33100E480C7 /* PopupViewModel.swift in Sources */,
+				09C539DE2B1F374F00563E70 /* ProductUseCase.swift in Sources */,
 				0903B0572ADED96C009DA000 /* BaseView.swift in Sources */,
+				0900E3CC2B0DE0DA00E480C7 /* PushEnum.swift in Sources */,
 				091F12042B08637E00878E73 /* APIConstant.swift in Sources */,
+				09800F7A2B24142000FCBEF5 /* MyCartDTO.swift in Sources */,
+				093A43AA2B26B05A00AD9EB3 /* WriteProductDTO.swift in Sources */,
 				0950FA192AD9A3C20038A20E /* LoginDTO.swift in Sources */,
+				09C539CF2B1EE08900563E70 /* LoginRepository.swift in Sources */,
 				09EB04E82AE40C9500F23C4A /* UserInfo.swift in Sources */,
 				09555CFD2AB1E98A00974A2E /* ViewModelType.swift in Sources */,
 				0909A5CB2AE7EDBE004D6E99 /* InputPhoneViewModel.swift in Sources */,
+				09C539CB2B1ED7B300563E70 /* LoginService.swift in Sources */,
 				0909A5C02AE7C0F3004D6E99 /* PopupViewController.swift in Sources */,
 				094A91852B03B7ED0080C03A /* MyPageViewModel.swift in Sources */,
 			);
@@ -738,8 +874,9 @@
 				DEVELOPMENT_TEAM = JA7UDVTQBU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WooYah-iOS/Info.plist";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "우야에서 사용자의 위치정보를 확인할려합니다.";
-				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "우야에서 사용자의 위치정보를 확인할려합니다.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "위치정보 권한이 필요합니다. (항상 or 앱을 사용하는 동안 위치정보를 수신합니다.)";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "위치정보 권한이 필요합니다. (항상 위치정보를 수신합니다.)";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치정보 권한이 필요합니다. (앱을 사용하는 동안에만 위치정보를 수신합니다.)";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -771,8 +908,9 @@
 				DEVELOPMENT_TEAM = JA7UDVTQBU;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "WooYah-iOS/Info.plist";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "우야에서 사용자의 위치정보를 확인할려합니다.";
-				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "우야에서 사용자의 위치정보를 확인할려합니다.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "위치정보 권한이 필요합니다. (항상 or 앱을 사용하는 동안 위치정보를 수신합니다.)";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "위치정보 권한이 필요합니다. (항상 위치정보를 수신합니다.)";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "위치정보 권한이 필요합니다. (앱을 사용하는 동안에만 위치정보를 수신합니다.)";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
