@@ -8,5 +8,7 @@
 import Foundation
  
 enum PushEnum{
-    
+    case fromMy
+    case fromHome_Map
+    case fromMessage
 }

@@ -49,7 +49,7 @@ class MapViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.viewModel.updateMapCartList()
+        self.viewModel.updateMapCartList(latitude: 36.1451773, longitude: 128.393913)
     }
     
     override func configure() {
@@ -113,7 +113,7 @@ class MapViewController: BaseViewController {
         
         self.cartListTabelView.rx.modelSelected(CartListDTO.self)
             .bind(onNext: { [weak self] cell in
-                self?.pushDetailCart(id: cell.cartId)
+                self?.showPopupViewController(id: cell.cartId)
             })
             .disposed(by: disposeBag)
         
@@ -184,8 +184,8 @@ class MapViewController: BaseViewController {
     }
 }
 extension MapViewController {
-    private func pushDetailCart(id:Int) {
-        let vc = PopupViewController()
+    private func showPopupViewController(id: Int) {
+        let vc = PopupViewController(viewModel: PopupViewModel(usecase:ProductUseCase(repository: ProductRepository(service: ProductService()))), id: id)
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc,animated: false,completion: nil)
     }

@@ -61,6 +61,21 @@ class CollectionViewCell: UICollectionViewCell {
         $0.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
     }
     
+    var goButtonTapped: (() -> Void)?
+    
+    func configureCell(_ item: DetailInfo) {
+        self.nameLabel.text = item.nickname
+        self.locateLabel.text = item.shoppingLocation
+        let productNames = item.products.map { $0.productName }
+        let productsText = productNames.joined(separator: "\n")
+        self.carLabel.text = productsText
+        goBtn.addTarget(self, action: #selector(goBtnClicked), for: .touchUpInside)
+    }
+    
+    @objc func goBtnClicked() {
+        goButtonTapped?()
+    }
+    
     func addView() {
         self.addSubview(myView)
         self.addSubview(goBtn)

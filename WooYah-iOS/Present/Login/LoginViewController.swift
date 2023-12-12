@@ -18,7 +18,7 @@ import NaverThirdPartyLogin
 
 final class LoginViewController: BaseViewController {
     
-    private let viewModel:LoginViewModel!
+    private let viewModel:LoginViewModel
     private let naverLoginInstance = NaverThirdPartyLoginConnection.getSharedInstance()
 
     private let titleLabel: UILabel = {

@@ -53,7 +53,7 @@ class MyPageViewController: BaseViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        viewModel.updateDummy()
+        viewModel.updateMyList(jwt: UserDefaults.standard.string(forKey: "AccessToken")! )
     }
     
     override func configure() {
@@ -93,17 +93,18 @@ class MyPageViewController: BaseViewController {
         }
         self.myProductTableView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(20)
-            $0.leading.equalToSuperview().offset(16)
-            $0.trailing.equalToSuperview().offset(-16)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
             $0.height.equalTo(400)
         }
     }
     
     override func setupBinding() {
         
-        viewModel.dummyList.bind(to: self.myProductTableView.rx.items(cellIdentifier: MyProductTableViewCell.identifier, cellType: MyProductTableViewCell.self))
+        viewModel.myList
+            .bind(to: self.myProductTableView.rx.items(cellIdentifier: MyProductTableViewCell.identifier, cellType: MyProductTableViewCell.self))
         {   index, item, cell in
-            print(item)
+            cell.selectionStyle = .none
             cell.configureCell(item)
         }
         .disposed(by: disposeBag)
@@ -112,22 +113,22 @@ class MyPageViewController: BaseViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] indexPath in
                 guard let self = self else { return }
-                
-                // 실제 데이터 삭제 작업 수행 (ViewModel에서 처리)
-                self.viewModel.deleteItem(at: indexPath)
+                let cartIdToDelete = self.viewModel.myList.value[indexPath.row].cartId
+                self.viewModel.deleteItem(cartId: cartIdToDelete)
             })
             .disposed(by: disposeBag)
         
-        myProductTableView.rx.modelSelected(MyPageDummy.self)
+        myProductTableView.rx.modelSelected(ProductInfoDTO.self)
             .bind(onNext: { [weak self] cell in
-                self?.pushDetailCart(id: cell.cartId)
+                print(cell.cartId)
+                self?.showPopupViewController(id: cell.cartId)
             })
             .disposed(by: disposeBag)
     }
 }
 extension MyPageViewController {
-    private func pushDetailCart(id:Int) {
-        let vc = PopupViewController()
+    private func showPopupViewController(id: Int) {
+        let vc = PopupViewController(viewModel: PopupViewModel(usecase:ProductUseCase(repository: ProductRepository(service: ProductService()))), id: id)
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc,animated: false,completion: nil)
     }

@@ -191,6 +191,8 @@ class WriteViewController: BaseViewController, UIScrollViewDelegate {
         self.navibar.backBtn.setImage(UIImage(systemName: "xmark"), for: .normal)
         self.navibar.delegate = self
         self.productTableView.rx.setDelegate(self).disposed(by: disposeBag)
+        self.productTableView.delegate = self
+
     }
     override func addview() {
         self.view.addSubview(navibar)
@@ -226,7 +228,8 @@ class WriteViewController: BaseViewController, UIScrollViewDelegate {
                                          productText: self.inputproductTextField.rx.text.orEmpty.asObservable(),
                                          productAddBtnTap: self.productAddBtn.rx.tap.asSignal(),
                                          personAddBtnTap: self.plusBtn.rx.tap.asSignal(),
-                                         personMinusBtnTap: self.minusBtn.rx.tap.asSignal())
+                                         personMinusBtnTap: self.minusBtn.rx.tap.asSignal(),
+                                         completeBtnTap: self.completeBtn.rx.tap.asSignal())
         let output = self.viewModel.transform(input: input)
         
         output.personCount
@@ -242,6 +245,25 @@ class WriteViewController: BaseViewController, UIScrollViewDelegate {
             .flatMap { [weak self] _ -> Driver<String> in
                 let vc = SearchAddressViewController()
                 self?.present(vc, animated: true, completion: nil)
+                
+                vc.coordinateSubject
+                    .subscribe(onNext: { [weak self] coordinates in
+                        guard let self = self else { return }
+                        guard let lat = coordinates.first, let lng = coordinates.last else {
+                            return 
+                        }
+                        self.viewModel.lat.accept(lat)
+                        self.viewModel.lng.accept(lng)
+
+                    })
+                    .disposed(by: self!.disposeBag)
+                
+                vc.locateSubject
+                    .subscribe(onNext: { [weak self] locateValue in
+                        self?.viewModel.locate.accept(locateValue)
+                    })
+                    .disposed(by: self!.disposeBag)
+                
                 return vc.locateSubject.asDriver(onErrorJustReturn: "")
             }
             .drive(inputLocateBtn.rx.title(for: .normal))
@@ -312,5 +334,10 @@ class WriteViewController: BaseViewController, UIScrollViewDelegate {
 extension WriteViewController: CustomNaviBarDelegate {
     func backBtnClick(_ navibar: CustomNaviBar) {
         self.dismiss(animated: false)
+    }
+}
+extension WriteViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return nil
     }
 }

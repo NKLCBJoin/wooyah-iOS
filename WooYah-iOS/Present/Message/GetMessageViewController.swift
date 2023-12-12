@@ -1,31 +1,40 @@
 //
-//  PopupViewController.swift
+//  GetMessageViewController.swift
 //  WooYah-iOS
 //
-//  Created by 최지철 on 2023/10/24.
+//  Created by 최지철 on 2023/12/03.
 //
 
 import UIKit
 
-class PopupViewController: BaseViewController {
+class GetMessageViewController: BaseViewController {
     
-    private let viewModel: PopupViewModel
-    
-    private let phoneNumLabel = UILabel().then {
-        $0.text = "판매자: 번호"
+    private let rejectLabel = UILabel().then {
+        $0.text = "아쉽게도 상대가 요청을 거절했습니다."
         $0.font = .pretendard(.Regular, size: 16)
         $0.textColor = UIColor(hexString: "#484848")
         $0.sizeToFit()
     }
-        
-    private let productTableView = UITableView(frame: CGRect.zero, style: .grouped).then{
-        $0.backgroundColor = UIColor(hexString: "#E8EAF0")
-        $0.layer.cornerRadius = 8
-        $0.register(ProductTableViewCell.self, forCellReuseIdentifier: ProductTableViewCell.identifier)
+    private let closeBtn = UIButton().then {
+        $0.backgroundColor = UIColor(hexString: "#65607")
+        $0.setTitle("닫기", for: .normal)
+        $0.titleLabel?.font = .pretendard(.Bold, size: 15)
+        $0.setTitleColor(.white, for: .normal)
+        $0.layer.cornerRadius = 20
+    }
+    private let rejectImg = UIImageView().then {
+        $0.image = UIImage(named: "rejectImg")
+        $0.contentMode = .scaleAspectFit
     }
     private let locateSV = UIStackView().then {
         $0.axis = .horizontal
         $0.spacing = 10
+    }
+    private let locateInfoLabel = UILabel().then {
+        $0.text = "동부 이촌동이마트"
+        $0.font = .pretendard(.Regular, size: 16)
+        $0.textColor = UIColor(hexString: "#484848")
+        $0.sizeToFit()
     }
     private let locateLabel = UILabel().then {
         $0.text = "장보는 장소"
@@ -48,17 +57,7 @@ class PopupViewController: BaseViewController {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 20
     }
-    
-    init(viewModel: PopupViewModel, id: Int) {
-        self.viewModel = viewModel
-        viewModel.updateInfo(id: id)
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+
     override func configure() {
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         self.view.isOpaque = false
@@ -66,17 +65,18 @@ class PopupViewController: BaseViewController {
         self.view.addGestureRecognizer(tapGesture)
         let contentTapGesture = UITapGestureRecognizer(target: self, action: nil)
         contentView.addGestureRecognizer(contentTapGesture)
-        productTableView.delegate = self
     }
     
     override func addview() {
         self.view.addSubview(contentView)
         self.contentView.addSubview(nameLabel)
-        self.contentView.addSubview(productTableView)
-        self.contentView.addSubview(phoneNumLabel)
+        self.contentView.addSubview(locateInfoLabel)
         self.contentView.addSubview(locateSV)
         self.locateSV.addArrangedSubview(locateIcon)
         self.locateSV.addArrangedSubview(locateLabel)
+        self.contentView.addSubview(rejectImg)
+        self.contentView.addSubview(closeBtn)
+        self.contentView.addSubview(rejectLabel)
     }
     
     override func layout() {
@@ -94,47 +94,32 @@ class PopupViewController: BaseViewController {
             $0.top.equalTo(nameLabel.snp.bottom).offset(7)
             $0.leading.equalToSuperview().offset(20)
         }
-        self.productTableView.snp.makeConstraints {
+        self.locateInfoLabel.snp.makeConstraints {
+            $0.top.equalTo(nameLabel.snp.bottom).offset(7)
+            $0.leading.equalTo(locateSV.snp.trailing).offset(20)
+        }
+        self.rejectImg.snp.makeConstraints {
             $0.top.equalTo(locateSV.snp.bottom).offset(11)
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalToSuperview().offset(-20)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(200)
             $0.height.equalTo(300)
         }
-        self.phoneNumLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().offset(-20)
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalToSuperview().offset(-20)
-            $0.height.equalTo(55)
+        self.rejectLabel.snp.makeConstraints {
+            $0.top.equalTo(rejectImg.snp.bottom).offset(11)
+            $0.centerX.equalToSuperview()
+        }
+        self.closeBtn.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(12)
+            $0.horizontalEdges.equalToSuperview().inset(30)
+            $0.height.equalTo(52)
         }
     }
     
     override func setupBinding() {
-
-        viewModel.detail
-            .bind(onNext: { [weak self] info in
-                self?.locateLabel.text = "장보는 장소: \(info.result?.shoppingLocation ?? "")"
-                self?.nameLabel.text = info.result?.nickname
-                self?.phoneNumLabel.text = "판매자:" + info.result!.ownerPhoneNumber
-            })
-            .disposed(by: disposeBag)
         
-        viewModel.productDetail
-            .bind(to: productTableView.rx.items(cellIdentifier: ProductTableViewCell.identifier, cellType: ProductTableViewCell.self)) { index, item, cell in
-                cell.configureCell(item,buy: true)
-            }
-            .disposed(by: disposeBag)
     }
     
     @objc private func handleTap() {
         self.dismiss(animated: false, completion: nil)
-    }
-}
-extension PopupViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return nil
-    }
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0.0
     }
 }

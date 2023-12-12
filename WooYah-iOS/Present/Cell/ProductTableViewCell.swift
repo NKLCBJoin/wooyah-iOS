@@ -48,6 +48,17 @@ class ProductTableViewCell: UITableViewCell {
         }
     }
     
+    func configureCell(_ item:Products, buy:Bool) {
+        ItemLabel.text = item.productName
+        if buy == true {
+            DeleteBtn.isHidden = true
+        }
+        else{
+            DeleteBtn.isHidden = false
+
+        }
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.addSubview(ItemLabel)

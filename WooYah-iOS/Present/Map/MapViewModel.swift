@@ -22,6 +22,7 @@ class MapViewModel:ViewModelType {
     struct Output {
         
     }
+    
     init(usecase:MapUsecaseProtocol) {
         self.usecase = usecase
     }
@@ -31,8 +32,9 @@ class MapViewModel:ViewModelType {
         
         return output
     }
-    func updateMapCartList() {
-        usecase.getMapCartList()
+    
+    func updateMapCartList(latitude: Double,longitude:Double) {
+        usecase.getMapCartList(latitude: latitude, longitude: longitude)
             .subscribe(onSuccess: { [weak self] info in
                 print(info)
                 self?.getCartList.onNext(info)
@@ -40,7 +42,7 @@ class MapViewModel:ViewModelType {
             }, onFailure: { error in
                 print("MapVM에러 발생: \(error)")
             }
-            )
-            .disposed(by: disposeBag)
+        )
+        .disposed(by: disposeBag)
     }
 }

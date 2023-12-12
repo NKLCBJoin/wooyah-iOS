@@ -11,7 +11,8 @@ import RxRelay
 
 class MyPageViewModel:ViewModelType {
     var disposeBag = DisposeBag()
-    let dummyList = BehaviorRelay<[MyPageDummy]>(value: [])
+    private let usecase: MyUseCaseProtocol
+    let myList = BehaviorRelay<[ProductInfoDTO]>(value: [])
 
     struct Input {
         
@@ -20,8 +21,9 @@ class MyPageViewModel:ViewModelType {
     struct Output {
         
     }
-    init(disposeBag: DisposeBag = DisposeBag()) {
-        self.disposeBag = disposeBag
+    
+    init(usecase: MyUseCaseProtocol) {
+        self.usecase = usecase
     }
     
     func transform(input: Input) -> Output {
@@ -30,18 +32,21 @@ class MyPageViewModel:ViewModelType {
         return output
     }
     
-    func updateDummy() {
-        print("더미업데이트")
-        dummyList.accept([
-            MyPageDummy(cartId: 1, locate: "금오공대", personCount: 3),
-            MyPageDummy(cartId: 2, locate: "구미 홈플러스", personCount: 5)
-        ])
+    func updateMyList(jwt: String) {
+        usecase.fetchMyCarts(jwt: jwt)
+            .subscribe(onSuccess: { [weak self]  info  in
+                self?.myList.accept(info.result!.data)
+            })
+            .disposed(by: disposeBag)
     }
+    
 
-    func deleteItem(at indexPath: IndexPath) {
-        var currentList = dummyList.value
-        currentList.remove(at: indexPath.row)
-        dummyList.accept(currentList)
+    func deleteItem(cartId: Int) {
+        usecase.deleteCart(id: cartId)
+            .subscribe(onSuccess: {  [weak self]  info in
+                self?.myList.accept(self?.myList.value.filter { $0.cartId != cartId } ?? [])
+            })
+            .disposed(by: disposeBag)
     }
 
 }

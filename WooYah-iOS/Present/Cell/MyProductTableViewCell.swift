@@ -15,13 +15,13 @@ class MyProductTableViewCell: UITableViewCell {
     
     private let locateLabel = UILabel().then {
         $0.text = "asd"
-        $0.font = .pretendard(.Regular, size: 14)
+        $0.font = .pretendard(.SemiBold, size: 14)
         $0.textColor = UIColor(hexString: "#111111")
         $0.sizeToFit()
     }
     private let personCountLabel = UILabel().then {
         $0.text = "asd"
-        $0.font = .pretendard(.Regular, size: 14)
+        $0.font = .pretendard(.SemiBold, size: 14)
         $0.textColor = UIColor(hexString: "#111111")
         $0.sizeToFit()
     }
@@ -47,10 +47,11 @@ class MyProductTableViewCell: UITableViewCell {
         }
     }
     
-    func configureCell(_ item:MyPageDummy) {
-        locateLabel.text = "장소: \(item.locate)"
-        personCountLabel.text = "\(item.personCount)명"
+    func configureCell(_ item: ProductInfoDTO) {
+        locateLabel.text = "장소: \(item.shoppingLocation)"
+        personCountLabel.text = "모집인원: \(item.participantNumber)명"
     }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.configure()

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 private enum Const {
   static let itemSize = CGSize(width: 300, height: 300)
@@ -87,10 +88,13 @@ class HomeViewController: BaseViewController {
         label.numberOfLines = 0
         return label
     }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.updateProductList()
+    }
 
     override func configure() {
         self.mainCollectionView.delegate = self
-        self.mainCollectionView.dataSource = self
         self.welcomeLabel.text = "안녕하세요.\n\(userinfo.shared.name ?? "유저")님!"
         self.locateLabel.text = "\(userinfo.shared.address ?? "xxx") 근방에 올라와 있는 글들입니다!"
     }
@@ -154,31 +158,26 @@ class HomeViewController: BaseViewController {
         self.writeBtn.rx.tap
             .asDriver()
             .drive(onNext: { [weak self] in
-                let vc = WriteViewController(WriteViewModel())
+                let vc = WriteViewController(WriteViewModel(usecase: ProductUseCase(repository: ProductRepository(service: ProductService()))))
                 vc.modalPresentationStyle = .fullScreen
                 self?.present(vc, animated: false, completion: nil)
             })
             .disposed(by: disposeBag)
+        
+        viewModel.homeList
+            .bind(to: self.mainCollectionView.rx.items(cellIdentifier: CollectionViewCell.identifier, cellType: CollectionViewCell.self)) { index, item, cell in
+                cell.configureCell(item)
+                cell.goButtonTapped = { [weak self] in
+                    let selectedItem = self?.viewModel.homeList.value[index]
+                    let id = selectedItem?.cartId ?? 0
+                    self?.showPopupViewController(id: id)
+                }
+            }
+            .disposed(by: disposeBag)
+        
     }
-    
-    @objc func goBtnClicked(_ sender: UIButton) {
-        print("\(sender.tag)바로가기 클릭")
-        self.showPopupViewController(id: 0)
-    }
-    
 }
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.identifier, for: indexPath) as! CollectionViewCell
-        cell.goBtn.addTarget(self, action: #selector(self.goBtnClicked), for: .touchUpInside)
-        cell.goBtn.tag = indexPath.row
-        return cell
-    }
-    
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func scrollViewWillEndDragging(
       _ scrollView: UIScrollView,
       withVelocity velocity: CGPoint,
@@ -193,7 +192,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 extension HomeViewController {
     private func showPopupViewController(id: Int) {
-        let vc = PopupViewController()
+        let vc = PopupViewController(viewModel: PopupViewModel(usecase:ProductUseCase(repository: ProductRepository(service: ProductService()))), id: id)
         vc.modalPresentationStyle = .overFullScreen
         self.present(vc,animated: false,completion: nil)
     }
